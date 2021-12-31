@@ -7,17 +7,22 @@ import { AccueilComponent } from './pages/accueil/accueil.component';
 import { HeaderComponent } from './structure/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FooterComponent } from './structure/footer/footer.component'; 
+import { ConnexionComponent } from './pages/connexion/connexion.component'; 
+
 import {MatToolbarModule} from '@angular/material/toolbar'; 
 import {MatButtonModule} from '@angular/material/button'; 
-
-import {MatIconModule} from '@angular/material/icon'; 
-
+import {MatIconModule} from '@angular/material/icon';
+import {MatFormFieldModule} from '@angular/material/form-field'; 
+import {MatGridListModule} from '@angular/material/grid-list';
+import { CookiesComponent } from './pages/cookies/cookies.component'; 
 @NgModule({
   declarations: [
     AppComponent,
     AccueilComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ConnexionComponent,
+    CookiesComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +30,9 @@ import {MatIconModule} from '@angular/material/icon';
     BrowserAnimationsModule,
     MatToolbarModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatFormFieldModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
