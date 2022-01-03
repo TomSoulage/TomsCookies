@@ -15,6 +15,10 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatFormFieldModule} from '@angular/material/form-field'; 
 import {MatGridListModule} from '@angular/material/grid-list';
 import { CookiesComponent } from './pages/cookies/cookies.component'; 
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { environment } from 'src/environments/environment';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +36,8 @@ import { CookiesComponent } from './pages/cookies/cookies.component';
     MatButtonModule,
     MatIconModule,
     MatFormFieldModule,
-    MatGridListModule
+    MatGridListModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
   providers: [],
   bootstrap: [AppComponent]
