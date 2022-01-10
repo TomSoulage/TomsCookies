@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+import { CookiesListService } from 'src/app/utils/services/cookies-list.service';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-cookies',
@@ -7,9 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CookiesComponent implements OnInit {
 
-  constructor() { }
+  constructor(public cookiesListeService : CookiesListService) { }
+  isShown: boolean = false ; // hidden by default
 
-  ngOnInit(): void {
+
+  toggleShow() {
+
+  this.isShown = ! this.isShown;
+
   }
 
+  ngOnInit() {
+    this.cookiesListeService.getCookies();
+
+  }
+
+ 
 }

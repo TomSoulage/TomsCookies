@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "fir-cookie": {
+      "hosting": {
+        "projet-cookie": [
+          "fir-cookie"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "fir-cookie"
+  }
+}

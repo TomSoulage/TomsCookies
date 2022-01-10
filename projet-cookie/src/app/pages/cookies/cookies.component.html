@@ -1,10 +1,21 @@
-<mat-grid-list cols="2" rowHeight="2:1">
-    <mat-grid-tile>
-        <div> <img src="./assets/images/cookie.jpg" alt="" class="cookies"> </div>
-        <div> <span>Cookie</span> </div>
-    </mat-grid-tile>
-    <mat-grid-tile>2</mat-grid-tile>
-    <mat-grid-tile>3</mat-grid-tile>
-    <mat-grid-tile>4</mat-grid-tile>
-  </mat-grid-list>
-  
+
+<mat-card class="example-card">
+  <mat-card-title-group>
+    <mat-card-title>Cookie chocolat</mat-card-title>
+    <mat-card-subtitle>15€</mat-card-subtitle>
+    <img mat-card-xl-image src="../../../assets/images/cookie.jpg" >
+  </mat-card-title-group>
+
+  <button mat-raised-button color="primary"  (click)="toggleShow()" type="checkbox" >Recette</button>
+
+<div *ngIf="isShown" class="row container-fluid"  id="divshow" >
+  <mat-card-content>
+    1 oeuf
+85 g sucre
+85 g beurre doux
+150 g farine
+100 g pépites de chocolat
+  </mat-card-content>
+</div>
+
+</mat-card>

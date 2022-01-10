@@ -1,0 +1,55 @@
+
+<div class="container" *ngIf="!post; else forminfo" novalidate> 
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)" class="form">
+  
+      <mat-form-field class="form-element">
+        <input matInput placeholder="Goût" formControlName="gout">
+        <mat-error *ngIf="!formGroup.controls['gout'].valid && formGroup.controls['gout'].touched">
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="form-element">
+        <textarea matInput placeholder="Recette" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5" formControlName="recette"></textarea>
+        <mat-error *ngIf="!formGroup.controls['recette'].valid && formGroup.controls['recette'].touched">
+          Required field, must be between 5 and 500 characters.
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="form-element">
+        <input matInput type="number" formControlName="prix" class="example-right-align" placeholder="Prix">
+        <span matPrefix>$&nbsp;</span>
+        <span matSuffix>.00</span>
+      </mat-form-field>
+  
+      <mat-form-field class="form-element">
+          <input matInput placeholder="Image" formControlName="image">
+          <mat-error *ngIf="!formGroup.controls['image'].valid && formGroup.controls['image'].touched">
+          </mat-error>
+        </mat-form-field>
+    
+      <div class="form-element">
+        <button mat-raised-button color="primary" type="submit" class="button" [disabled]="!formGroup.valid">Submit Form</button>
+      </div>
+  
+    </form>
+  </div>
+  
+  <ng-template #forminfo>
+    <div class="container">
+      {{ post | json }}
+    </div>
+  </ng-template>
+  
+  
+  
+  
+  <mat-grid-list cols="2" rowHeight="2:1">
+      <mat-grid-tile>
+          <div> <img src="./assets/images/cookie.jpg" alt="" class="cookies"> </div>
+          <div> <span>Cookie</span> </div>
+      </mat-grid-tile>
+      <mat-grid-tile>2</mat-grid-tile>
+      <mat-grid-tile>3</mat-grid-tile>
+      <mat-grid-tile>4</mat-grid-tile>
+    </mat-grid-list>
+    
