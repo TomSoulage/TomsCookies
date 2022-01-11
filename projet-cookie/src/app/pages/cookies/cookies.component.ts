@@ -1,5 +1,5 @@
 import { Component, OnInit} from '@angular/core';
-import { CookiesListService } from 'src/app/utils/services/cookies-list.service';
+import { CookiesListService } from 'src/app/core/services/cookies-list.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 

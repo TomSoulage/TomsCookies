@@ -1,0 +1,11 @@
+<mat-toolbar color="primary">
+    <span>MyGoodCookies</span>
+    <div class="spacer"> </div>
+    <a mat-button routerLink="accueil"><mat-icon>home</mat-icon> Accueil</a>
+    <a mat-button routerLink="cookies"><mat-icon>list</mat-icon> Cookies</a>
+    <a mat-button routerLink="cookieDuMois">Cookie du mois</a>
+    
+    <a *ngIf="estCo()" mat-raised-button (click)="deconnexion()" color="accent" ><mat-icon>login</mat-icon> Déconnexion</a>
+    <a *ngIf="!estCo()" mat-raised-button color="accent" routerLink="connexion"><mat-icon>login</mat-icon> Connexion</a>
+
+  </mat-toolbar>

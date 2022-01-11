@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { docSnapshots } from '@angular/fire/firestore';
 import { getFirestore, doc, setDoc, collection, getDoc, onSnapshot, DocumentReference, DocumentData, addDoc, getDocs } from 'firebase/firestore';
 import { docData } from 'rxfire/firestore';
-import { ICookie } from '../modeles/icookie';
+import { ICookie } from '../models/icookie';
 
 @Injectable({
   providedIn: 'root'
@@ -40,7 +40,7 @@ export class CookiesListService {
     // let i = 0 ;
     const querySnapshot = await getDocs(this.collection);
     querySnapshot.forEach((doc) => {
-      s.listeCookies[0]['id'] = 1;
+  
       /* this.listeCookies[0]['gout'] = JSON.stringify(doc.data()['gout']);
       this.listeCookies[0]['prix'] = Number(JSON.stringify(doc.data()['prix']));
       this.listeCookies[0]['recette'] = JSON.stringify(doc.data()['recette']); */

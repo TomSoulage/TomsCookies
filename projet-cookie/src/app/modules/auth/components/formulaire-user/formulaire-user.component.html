@@ -1,0 +1,25 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <p>
+      <mat-form-field>
+        <input matInput formControlName="email" placeholder="Email"  type="text" required />
+        <mat-error *ngIf="email?.hasError('required')">
+          Email requis
+        </mat-error>
+        <mat-error *ngIf="email?.hasError('email')">
+          Email non-valide. Veuillez entrer un email correcte.
+        </mat-error>
+      </mat-form-field>
+    </p>
+  
+    <p>
+      <mat-form-field>
+        <input matInput formControlName="password" type="password" placeholder="Mot de passe" required />
+        <mat-error *ngIf="password?.hasError('required')">
+           Mot de passe requis ( 6 charactères min. )
+        </mat-error>    
+      </mat-form-field>
+    </p>
+
+
+    <button [disabled]="form.invalid" mat-raised-button type="submit"> Valider </button>    
+  </form>
