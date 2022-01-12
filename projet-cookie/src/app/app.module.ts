@@ -16,7 +16,11 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatFormFieldModule} from '@angular/material/form-field'; 
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatCardModule} from '@angular/material/card';
-import { MatInputModule} from '@angular/material/input'
+import {MatInputModule} from '@angular/material/input'
+import {MatListModule} from '@angular/material/list';
+import {MatTableModule} from '@angular/material/table';
+
+
 import { AuthModule } from '@angular/fire/auth';
 
 import { AngularFireModule } from '@angular/fire/compat';
@@ -32,6 +36,7 @@ import { providePerformance,getPerformance } from '@angular/fire/performance';
 import { provideRemoteConfig,getRemoteConfig } from '@angular/fire/remote-config';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { AddCookieComponent } from './modules/admin/components/add-cookie/add-cookie.component';
+import { PanierComponent } from './pages/panier/panier.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +46,7 @@ import { AddCookieComponent } from './modules/admin/components/add-cookie/add-co
     FooterComponent,
     CookiesComponent,
     AddCookieComponent,
+    PanierComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,6 +61,8 @@ import { AddCookieComponent } from './modules/admin/components/add-cookie/add-co
     MatGridListModule,
     MatCardModule,
     MatInputModule,
+    MatListModule,
+    MatTableModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAnalytics(() => getAnalytics()),

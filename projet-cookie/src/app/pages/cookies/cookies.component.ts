@@ -2,6 +2,8 @@ import { Component, OnInit} from '@angular/core';
 import { CookiesListService } from 'src/app/core/services/cookies-list.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ICookie } from 'src/app/core/models/icookie';
+import { PanierService } from 'src/app/core/services/panier.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 
 @Component({
@@ -11,10 +13,11 @@ import { ICookie } from 'src/app/core/models/icookie';
 })
 export class CookiesComponent implements OnInit {
 
-  constructor(public cookiesListeService : CookiesListService) { }
-  
-  listeAfficherRecette = this.cookiesListeService.listeAfficherRecette ;
+  constructor(public cookiesListeService : CookiesListService, private panierService: PanierService, private authService: AuthService, private formBuilder: FormBuilder) { }
 
+  //Affichage recette 
+  listeAfficherRecette = this.cookiesListeService.listeAfficherRecette ;
+  listeCookies = this.cookiesListeService.listeCookies;
 
   afficherRecette(n: number) {
 
@@ -29,12 +32,29 @@ export class CookiesComponent implements OnInit {
     return this.listeAfficherRecette[n] ; 
   }
 
+  //Panier
+  formGroup: FormGroup | any;
+  titleAlert: string = 'This field is required';
+  post: any = '';
   
-
-
-  ngOnInit() {
-
+  createForm() {
+    this.formGroup = this.formBuilder.group({
+      'quantite': [null, [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+      'validate': ''
+    });
   }
 
- 
+  onSubmit(index: number,id: string, post:any) {
+    this.post = post;
+    console.log(post);
+    var prix = this.listeCookies[index]["prix"] * post["quantite"];
+    console.log(prix);
+    var idUser = this.authService.getUserId()
+    this.panierService.addOrder(idUser,id,post["quantite"],prix);
+  } 
+
+  ngOnInit() {
+    this.createForm();
+  }
+
 }

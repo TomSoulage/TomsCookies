@@ -1,0 +1,16 @@
+
+.horizontal-mat-list-item {
+  
+}
+
+.flex-container-tab {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.element-tab {
+    width: 100px;
+    text-align: center;
+}
+   

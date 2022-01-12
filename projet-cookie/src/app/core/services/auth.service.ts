@@ -11,6 +11,7 @@ import { ILoginData } from '../models/ilogin-data';
 import { IUser } from '../models/iuser';
 import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
+import { error } from '@angular/compiler/src/util';
 
 @Injectable({
   providedIn: 'root',
@@ -21,17 +22,7 @@ export class AuthService {
   userData: any;
   db = getFirestore();
 
-/*   this.auth.db.subscribe(user => {
-    if(user) {
-      this.userData = user;
-      localStorage.setItem('user', JSON.stringify(this.userData));
-      //JSON.parse(localStorage.getItem('user'));
-    }else {
-      localStorage.setItem('user', null);
-      //JSON.parse(localStorage.getItem('user'));
-    }
-  })
-} */
+
   login({ email, password }: ILoginData) {
 
     return signInWithEmailAndPassword(this.auth, email, password);
@@ -61,7 +52,14 @@ export class AuthService {
 
   }
 
+  getUserId() {
 
+    if(getAuth().currentUser!=null){
+      return getAuth().currentUser?.uid;
+    }else {
+      return "noId";
+    }
+  }
 
 
 }

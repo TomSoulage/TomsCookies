@@ -1,0 +1,26 @@
+<mat-card>
+    <mat-card-title>Panier</mat-card-title>
+
+    <mat-list>
+        <mat-list-item class="horizontal-mat-list-item"> 
+            <div class="flex-container-tab"> 
+                <div class="element-tab"> Nom Cookies </div> 
+                <div class="element-tab">  Quantite </div> 
+                <div class="element-tab">  Prix </div>  
+                <div class="element-tab">  Action </div> 
+            </div> </mat-list-item>
+    </mat-list>
+
+
+    <mat-list *ngFor="let o of panierService.listeDuPanier">
+        <mat-list-item> 
+            <div class="flex-container-tab"> 
+                <div class="element-tab"> {{o.nomCookie}} </div>  
+                <div class="element-tab">{{o.quantite}} </div> 
+                 <div class="element-tab"> {{o.prix}} </div> 
+                 <div class="element-tab">  <button mat-raised-button color="warn" type="checkbox" (click)="delete(o.id)"> Supprimer</button> </div> 
+            </div>  
+        </mat-list-item>
+        <mat-divider></mat-divider>
+    </mat-list>
+</mat-card> 

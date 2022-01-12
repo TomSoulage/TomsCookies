@@ -1,0 +1,18 @@
+<mat-card-title> Liste des cookies</mat-card-title>
+<div class="cookies-list">
+    <mat-card *ngFor="let c of cookiesListeService.listeCookies; index as indexOfElement" class="example-card">
+      <mat-card-title-group>
+        <mat-card-title> {{c.gout}} </mat-card-title>
+        <mat-card-subtitle> {{c.prix}} € </mat-card-subtitle>
+        <img mat-card-xl-image src="{{c.image}}" >
+      </mat-card-title-group>
+      <div class="div-button">
+          
+       
+
+        <button mat-raised-button color="primary" [routerLink]="['/update-cookie', c.id]"  > Modifier</button>
+        <button mat-raised-button color="warn" type="checkbox" (click)="delete(c.id)"> Supprimer</button>
+      </div>
+    </mat-card>
+</div>    
+      

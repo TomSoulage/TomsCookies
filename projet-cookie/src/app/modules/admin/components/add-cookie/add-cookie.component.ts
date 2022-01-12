@@ -11,7 +11,7 @@ export class AddCookieComponent implements OnInit {
   constructor(public cookiesListeService : CookiesListService, private formBuilder: FormBuilder) { }
 
   formGroup: FormGroup | any;
-  titleAlert: string = 'This field is required';
+  titleAlert: string = 'Ce champ est requis!';
   post: any = '';
 
   ngOnInit(): void {
@@ -27,8 +27,6 @@ export class AddCookieComponent implements OnInit {
       'validate': ''
     });
   }
-
-
 
   onSubmit(post: any) {
     this.post = post;
