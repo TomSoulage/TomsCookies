@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { docSnapshots } from '@angular/fire/firestore';
 import { getFirestore, doc, setDoc, collection, getDoc, onSnapshot, DocumentReference, DocumentData, addDoc, getDocs } from 'firebase/firestore';
+import { list } from 'rxfire/database';
 import { docData } from 'rxfire/firestore';
 import { ICookie } from '../models/icookie';
+
 
 @Injectable({
   providedIn: 'root'
@@ -10,12 +12,19 @@ import { ICookie } from '../models/icookie';
 export class CookiesListService {
 
   listeCookies:Array<ICookie> = [];
+ 
+  //On récupère les id de chaque doc ( 1 doc = 1 cookie sur Firestore)
+  listeId: Array<String> = [];
+  
+  //Utiliser pour afficher la recette sur la liste des Cookies ( fonction avec bouton)
+  listeAfficherRecette: Array<Boolean> = [];
 
+  data = []
+  
   constructor() { 
     this.getCookies();
   }
 
-  
   db = getFirestore();
   collection = collection(this.db, "cookies")
 
@@ -34,64 +43,24 @@ export class CookiesListService {
   }
 
 
-
   async getCookies(){
-    const s = this;
-    // let i = 0 ;
-    const querySnapshot = await getDocs(this.collection);
+
+   const querySnapshot = await getDocs(this.collection);
+    
     querySnapshot.forEach((doc) => {
-  
-      /* this.listeCookies[0]['gout'] = JSON.stringify(doc.data()['gout']);
-      this.listeCookies[0]['prix'] = Number(JSON.stringify(doc.data()['prix']));
-      this.listeCookies[0]['recette'] = JSON.stringify(doc.data()['recette']); */
-      // i+=1;
-      //console.log(`${doc.id} => ${JSON.stringify(doc.data())}`);
-    }); 
+      doc.id
+      this.listeId.push(doc.id);
+      this.listeCookies.push(doc.data() as ICookie);
+    });  
+
+    for (let i=0; i < this.listeCookies.length; i++){
+      this.listeCookies[i]["id"] = String(this.listeId[i]);
+      this.listeAfficherRecette[i] = false;
+    }
   }
   
   
-/* fonction qui marche
-  addCookie(goutCookie:string,prixCookie:number,descriptionCookie:string, imgCookie:string){
-    const data = {
-      gout: goutCookie,
-      prix: prixCookie,
-      description: descriptionCookie,
-      image : imgCookie
-    };
-    setDoc(this.cookie,data)
-    console.log('Cookie ajouté');
-  }
-
-*/
-
-/*   
-  cookiesListe = collection(this.firestore,'cookies');
-
-  async getCookie(c : DocumentReference<DocumentData>){
-    c = this.cookie
-    onSnapshot(c,docSnapshot => {
-      if (docSnapshot.exists()) {
-        const docData = docSnapshot.data();
-        console.log(`In realtime, docData is ${JSON.stringify(docData)}`)
-      }
-
-    })
-  }
-
-
-  async getCookies(c : DocumentReference<DocumentData>){
-    c = this.cookie
-    onSnapshot(c,docSnapshot => {
-      if (docSnapshot.exists()) {
-        const docData = docSnapshot.data();
-        console.log(`In realtime, docData is ${JSON.stringify(docData)}`)
-      }
-
-    })
-  } */
 
 }
-function db(db: any, arg1: string): import("@firebase/firestore").CollectionReference<DocumentData> {
-  throw new Error('Function not implemented.');
-}
+
 

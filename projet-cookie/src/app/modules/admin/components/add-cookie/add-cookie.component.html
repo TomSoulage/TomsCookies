@@ -1,5 +1,6 @@
+<mat-card> 
+  <mat-card-title>Ajout d'un cookie</mat-card-title>
 
-<div class="container" *ngIf="!post; else forminfo" novalidate> 
     <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)" class="form">
   
       <mat-form-field class="form-element">
@@ -32,14 +33,10 @@
       </div>
   
     </form>
-  </div>
   
-  <ng-template #forminfo>
-    <div class="container">
-      {{ post | json }}
-    </div>
-  </ng-template>
-  
+
+</mat-card>
+
   
   
   

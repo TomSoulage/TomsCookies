@@ -1,6 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { CookiesListService } from 'src/app/core/services/cookies-list.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { ICookie } from 'src/app/core/models/icookie';
 
 
 @Component({
@@ -11,17 +12,27 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 export class CookiesComponent implements OnInit {
 
   constructor(public cookiesListeService : CookiesListService) { }
-  isShown: boolean = false ; // hidden by default
+  
+  listeAfficherRecette = this.cookiesListeService.listeAfficherRecette ;
 
 
-  toggleShow() {
+  afficherRecette(n: number) {
 
-  this.isShown = ! this.isShown;
-
+    if(this.listeAfficherRecette[n]){
+      this.listeAfficherRecette[n] = false;
+    }else {
+      this.listeAfficherRecette[n] = true;
+    }
   }
 
+  estAfficher(n: number){
+    return this.listeAfficherRecette[n] ; 
+  }
+
+  
+
+
   ngOnInit() {
-    this.cookiesListeService.getCookies();
 
   }
 

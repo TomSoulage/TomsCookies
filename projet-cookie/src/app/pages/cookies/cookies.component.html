@@ -1,25 +1,22 @@
 
-<mat-card class="example-card">
-  <mat-card-title-group>
-    <mat-card-title>Cookie chocolat</mat-card-title>
-    <mat-card-subtitle>15€</mat-card-subtitle>
-    <img mat-card-xl-image src="../../../assets/images/cookie.jpg" >
-  </mat-card-title-group>
-
-
-  <button mat-raised-button color="primary"  (click)="toggleShow()" type="checkbox" > Recette</button>
-
-  <button mat-raised-button color="secondary" type="checkbox" > Ajouter <mat-icon>add_shopping_cart</mat-icon> </button>
-
-
-<div *ngIf="isShown" class="row container-fluid"  id="divshow" >
-  <mat-card-content>
-    1 oeuf
-85 g sucre
-85 g beurre doux
-150 g farine
-100 g pépites de chocolat
-  </mat-card-content>
+<div class="cookies-list">
+  <mat-card *ngFor="let c of cookiesListeService.listeCookies; index as indexOfElement" class="example-card">
+    <mat-card-title-group>
+      <mat-card-title> {{c.gout}} </mat-card-title>
+      <mat-card-subtitle> {{c.prix}} € </mat-card-subtitle>
+      <img mat-card-xl-image src="{{c.image}}" >
+    </mat-card-title-group>
+  
+    <button mat-raised-button color="primary"  (click)="afficherRecette(indexOfElement)" type="checkbox" > Recette</button>
+  
+    <button mat-raised-button color="secondary" type="checkbox" > Ajouter <mat-icon>add_shopping_cart</mat-icon> </button>
+  
+  
+  <div *ngIf="estAfficher(indexOfElement)" class="row container-fluid" >
+    <mat-card-content>
+      {{c.recette}}
+    </mat-card-content>
+  </div>
+  
+  </mat-card>
 </div>
-
-</mat-card>

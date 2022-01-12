@@ -1,6 +1,7 @@
 export interface ICookie {
-    id:number | string;
+    id:string;
     gout:string;
     recette?:string;
     prix:number;
+    image:string;
 }
