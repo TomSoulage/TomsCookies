@@ -10,3 +10,9 @@
   margin: 15px auto;
   width: 1000px;
 }
+
+.flex-buttons{
+  display: flex;
+  justify-content: space-around;
+  width: auto;
+}

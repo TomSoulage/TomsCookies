@@ -1,5 +1,6 @@
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IPanier } from 'src/app/core/models/ipanier';
 import { CookiesListService } from 'src/app/core/services/cookies-list.service';
 import { PanierService } from 'src/app/core/services/panier.service';
@@ -17,29 +18,18 @@ import { PanierService } from 'src/app/core/services/panier.service';
 })
 export class PanierComponent implements OnInit {
 
-  constructor(public panierService: PanierService, private cookieService: CookiesListService) { }
+  constructor(public panierService: PanierService, private cookieService: CookiesListService, private router: Router,private activatedRoute: ActivatedRoute) { }
 
-  nomCookie = 'cook';
+  panier : IPanier[] = [];
 
   //this.cookieService.getCookieById("ss").then(val => self = val);
   
   ngOnInit(): void {
-    this.panierService.getUserPanier();
-    this.afficherNom();
+   
+    this.panier = this.panierService.listeDuPanier;
   }
 
-  afficherNom():void{
-    this.cookieService.getCookieById("5zRwXGS2JklkDT0nd7ju").then(
-      cookie => {
-        this.nomCookie = cookie[0]["gout"];
-      } )
-  }
-  afficherGoutCookie(n:string):void{
-    this.cookieService.getCookieById(n).then(
-      cookie => {
-        return cookie[0]["gout"];
-      } )
-  }
+  
 
 
   //this.cookieService();

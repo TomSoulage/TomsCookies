@@ -13,11 +13,12 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class CookiesComponent implements OnInit {
 
-  constructor(public cookiesListeService : CookiesListService, private panierService: PanierService, private authService: AuthService, private formBuilder: FormBuilder) { }
+  cookies:ICookie[] = [];
+
+  constructor(public cookiesService : CookiesListService, private panierService: PanierService, private authService: AuthService, private formBuilder: FormBuilder) { }
 
   //Affichage recette 
-  listeAfficherRecette = this.cookiesListeService.listeAfficherRecette ;
-  listeCookies = this.cookiesListeService.listeCookies;
+  listeAfficherRecette = this.cookiesService.listeAfficherRecette ;
 
   afficherRecette(n: number) {
 
@@ -47,14 +48,18 @@ export class CookiesComponent implements OnInit {
   onSubmit(index: number,id: string, post:any) {
     this.post = post;
     console.log(post);
-    var prix = this.listeCookies[index]["prix"] * post["quantite"];
-    console.log(prix);
+    //var prix = this.listeCookies[index]["prix"] * post["quantite"];
+    //console.log(prix);
     var idUser = this.authService.getUserId()
-    this.panierService.addOrder(idUser,id,post["quantite"],prix);
+    //this.panierService.addOrder(idUser,id,post["quantite"],prix);
   } 
 
   ngOnInit() {
-    this.createForm();
+    this.cookiesService.getCookies().subscribe(
+      res => this.cookies = res
+    );
+    console.log(this.cookies);
+    //this.createForm();
   }
 
 }

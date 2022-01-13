@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { addDoc, collection } from '@angular/fire/firestore';
+import { Observable } from '@firebase/util/dist/src/subscribe';
+import { getAuth } from 'firebase/auth';
 import { deleteDoc, doc, getDocs, getFirestore } from 'firebase/firestore';
-import { StorageReference } from 'firebase/storage';
+import { collectionData } from 'rxfire/firestore';
 import { ICookie } from '../models/icookie';
 import { IPanier } from '../models/ipanier';
 import { AuthService } from './auth.service';
@@ -37,15 +39,9 @@ export class PanierService {
       console.error("Error adding document: ", e);
     }
   }
-  
-  getGoutCookie(n:string):any{
-    return this.cookieService.getCookieById(n).then(
-      cookie => {
-        return cookie[0]["gout"];;
-      } )
-  }
 
   async getUserPanier(){
+
     var idUser = this.authService.getUserId();
     const querySnapshot = await getDocs(this.collection);
      
@@ -53,29 +49,35 @@ export class PanierService {
        this.listeDuPanier.push(doc.data() as IPanier);
        this.listeIdCommandes.push(doc.id);
      });  
- 
-     for (let i=0; i < this.listeDuPanier.length; i++){
+     
 
-        if(this.listeDuPanier[i]["idUser"]!=idUser){
-          this.listeDuPanier.slice(i);
-        }
-       
-     }
+     this.listeDuPanier = this.listeDuPanier.filter(x => x.idUser == idUser);
+
 
      for (let i=0; i < this.listeDuPanier.length; i++){
 
         this.listeDuPanier[i]["id"] = String(this.listeIdCommandes[i]);
 
-        this.cookieService.getCookieById(this.listeDuPanier[i]["idCookie"]).then(
+        
+        /* this.cookieService.getCookieById(this.listeDuPanier[i]["idCookie"]).then(
           cookie => {
             this.listeDuPanier[i]["nomCookie"] = cookie[0]["gout"];;
-          } )
+          } ) */
       }
    }
 
    async deleteCookiePanier(id: string){
     await deleteDoc(doc(this.db, "panier", id));
-
   }
+
+/* 
+  deleteCookiePanier(panier:IPanier[], cookie: ICookie){
+
+    if(panier.id==)
+    const docRef = doc(this.db, `panier/${panier.id}`);
+    return deleteDoc(docRef);
+  }
+ */
+
   
 }

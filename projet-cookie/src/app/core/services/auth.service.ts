@@ -53,12 +53,8 @@ export class AuthService {
   }
 
   getUserId() {
-
-    if(getAuth().currentUser!=null){
-      return getAuth().currentUser?.uid;
-    }else {
-      return "noId";
-    }
+      return this.auth.currentUser?.uid;
+ 
   }
 
 

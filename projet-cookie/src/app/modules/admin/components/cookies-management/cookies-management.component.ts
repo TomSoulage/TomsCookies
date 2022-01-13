@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ICookie } from 'src/app/core/models/icookie';
 import { CookiesListService } from 'src/app/core/services/cookies-list.service';
 
 @Component({
@@ -8,14 +9,19 @@ import { CookiesListService } from 'src/app/core/services/cookies-list.service';
 })
 export class CookiesManagementComponent implements OnInit {
 
-  constructor(public cookiesListeService : CookiesListService) { }
+  cookies:ICookie[] = [];
+
+  constructor(public cookiesService : CookiesListService) { }
 
   ngOnInit(): void {
-   
+    this.cookiesService.getCookies().subscribe(
+      res => this.cookies = res
+    );
   }
 
-  delete(id:string){
-    this.cookiesListeService.deleteCookie(id);
+  delete(cookie: ICookie){
+    this.cookiesService.deleteCookie(cookie);
+    alert('Cookie supprimé !');    
   }
 }
 

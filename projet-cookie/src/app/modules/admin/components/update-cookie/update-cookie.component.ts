@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ICookie } from 'src/app/core/models/icookie';
 import { CookiesListService } from 'src/app/core/services/cookies-list.service';
@@ -10,61 +10,64 @@ import { CookiesListService } from 'src/app/core/services/cookies-list.service';
   styleUrls: ['./update-cookie.component.css']
 })
 export class UpdateCookieComponent implements OnInit {
+  _id: string | null;
 
-  listeCookies = this.cookieService.listeCookies;
-  cookie!: any[] ;
-  _id:string | null;
-  
-  formGroup: FormGroup | any;
+  cookie!: ICookie;
   titleAlert: string = 'Ce champ est requis!';
   post: any = '';
 
-  constructor(private router:ActivatedRoute, private cookieService: CookiesListService,private formBuilder: FormBuilder) { 
+
+  constructor(private router:ActivatedRoute, private cookieService: CookiesListService, public fb: FormBuilder) { 
     this._id=  this.router.snapshot.paramMap.get("id");
  
   }
 
+  formGroup: FormGroup | any;
 
   ngOnInit(): void {
-   
-    // if(this._id) this.cookie = this.cookieService.getCookieById(this._id) as ICookie
-    //console.log("liste" + this.listeCookies);
-    this.createForm();
+    
+    this.initForm();
+    if(this._id){
+      this.cookieService.getCookieByID(this._id).subscribe(res => {
+        this.cookie = res;
+        this.createForm(this.cookie);
+      })
+    }
   }
 
-  createForm() {
-    this.formGroup = this.formBuilder.group({
-      'gout': ['test', [Validators.required]],
-      'image': ['test', Validators.required],
-      'prix': ['test', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
-      'recette': ['test', [Validators.required, Validators.minLength(5), Validators.maxLength(500)]],
+  initForm() {
+    this.formGroup = this.fb.group({
+      'gout': '',
+      'image': '',
+      'prix': '',
+      'recette': '',
       'validate': ''
     });
   }
 
-  createFormDynamique() {
-
-    this.cookieService.getCookieById("5zRwXGS2JklkDT0nd7ju").then(
-      cookie => {
-        
-      } )
-
-    this.formGroup = this.formBuilder.group({
-      'gout': ['test', [Validators.required]],
-      'image': ['test', Validators.required],
-      'prix': ['test', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
-      'recette': ['test', [Validators.required, Validators.minLength(5), Validators.maxLength(500)]],
+  createForm(cookie: ICookie) {
+    this.formGroup = this.fb.group({
+      'gout': [this.cookie.gout, [Validators.required]],
+      'image': [this.cookie.image, Validators.required],
+      'prix': [this.cookie.prix, [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+      'recette': [this.cookie.recette, [Validators.required, Validators.minLength(5), Validators.maxLength(500)]],
       'validate': ''
     });
   }
 
-
-
-
-  onSubmit(post: any) {
+  onSubmit(post: any,) {
     this.post = post;
     console.log(post);
-    this.cookieService.addCookie(post['gout'],post['prix'],post['recette'],post['image'])
-  }
+    let newCookie: ICookie = {
+      id : this.cookie.id,
+      gout : post['gout'],
+      recette : post['recette'],
+      prix : post['prix'],
+      image : post['image']
+    }
 
+    this.cookieService.updateCookie(newCookie);
+    alert('Cookie mis à jour !');    
+  }
+ 
 }
