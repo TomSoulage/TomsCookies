@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { ICookie } from 'src/app/core/models/icookie';
 import { PanierService } from 'src/app/core/services/panier.service';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { IPanier } from 'src/app/core/models/ipanier';
 
 
 @Component({
@@ -14,7 +15,13 @@ import { AuthService } from 'src/app/core/services/auth.service';
 export class CookiesComponent implements OnInit {
 
   cookies:ICookie[] = [];
-
+  panier: IPanier = {
+    id: this.authService.getUserId(),
+    listeIdCookies: [""],
+    listeNbCookies: [0],
+    listePrixTotalParCookie: [0],
+    prixTotal: 0
+  }
   constructor(public cookiesService : CookiesListService, private panierService: PanierService, private authService: AuthService, private formBuilder: FormBuilder) { }
 
   //Affichage recette 
@@ -33,6 +40,15 @@ export class CookiesComponent implements OnInit {
     return this.listeAfficherRecette[n] ; 
   }
 
+  
+  ajouterAuPanier(cookie: ICookie){
+    return this.panierService.ajouterCookiePanier(this.panier,cookie);
+  }
+
+
+
+  // 
+
   //Panier
   formGroup: FormGroup | any;
   titleAlert: string = 'This field is required';
@@ -48,18 +64,31 @@ export class CookiesComponent implements OnInit {
   onSubmit(index: number,id: string, post:any) {
     this.post = post;
     console.log(post);
-    //var prix = this.listeCookies[index]["prix"] * post["quantite"];
+    //var prix = this.listeIdCookies[index]["prix"] * post["quantite"];
     //console.log(prix);
     var idUser = this.authService.getUserId()
     //this.panierService.addOrder(idUser,id,post["quantite"],prix);
   } 
 
+  //
+
   ngOnInit() {
+
     this.cookiesService.getCookies().subscribe(
       res => this.cookies = res
     );
-    console.log(this.cookies);
+    this.panierService.getPanierByID(this.authService.getUserId()).subscribe(res => {
+      this.panier = res;
+    })    
+ 
+  }
 
+  estCo(){
+    return this.authService.estConnecte();
+  }
+
+  recupId(){
+    return this.authService.getUserId();
   }
 
 }

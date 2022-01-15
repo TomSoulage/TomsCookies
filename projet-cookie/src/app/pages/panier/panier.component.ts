@@ -2,6 +2,8 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IPanier } from 'src/app/core/models/ipanier';
+import { ICookie } from 'src/app/core/models/icookie';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { CookiesListService } from 'src/app/core/services/cookies-list.service';
 import { PanierService } from 'src/app/core/services/panier.service';
 
@@ -18,24 +20,40 @@ import { PanierService } from 'src/app/core/services/panier.service';
 })
 export class PanierComponent implements OnInit {
 
-  constructor(public panierService: PanierService, private cookieService: CookiesListService, private router: Router,private activatedRoute: ActivatedRoute) { }
+  constructor(private panierService: PanierService, private authService: AuthService,private cookiesService: CookiesListService, private router: Router,private activatedRoute: ActivatedRoute) { }
 
-  panier : IPanier[] = [];
-
-  //this.cookieService.getCookieById("ss").then(val => self = val);
-  
-  ngOnInit(): void {
-   
-    this.panier = this.panierService.listeDuPanier;
+  panier: IPanier = {
+    id: this.authService.getUserId(),
+    listeIdCookies: [""],
+    listeNbCookies: [0],
+    listePrixTotalParCookie: [0],
+    prixTotal: 0
   }
 
+  cookies:ICookie[] = [];
+
   
+  ngOnInit(): void {
+    this.cookiesService.getCookies().subscribe(
+      res => this.cookies = res
+    );
+    console.log("Cookies")
+    console.log(this.cookies);
+    this.panierService.getPanierByID(this.authService.getUserId()).subscribe(res => {
+      this.panier = res;
+    })
+  }
 
+  getCookieName(id:String){
+    return this.cookies.filter(res=> res.id == id)[0]["gout"];
+  }
 
-  //this.cookieService();
+  getCookieImage(id:String){
+    return this.cookies.filter(res=> res.id == id)[0]["image"];
+  }
 
-  delete(id:string){
-    this.panierService.deleteCookiePanier(id);
+  delete(index:number){
+    this.panierService.deleteCookiesPanier(this.panier,index);
   }
 
 }

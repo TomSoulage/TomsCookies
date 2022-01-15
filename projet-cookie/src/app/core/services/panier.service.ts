@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
-import { addDoc, collection } from '@angular/fire/firestore';
 import { Observable } from '@firebase/util/dist/src/subscribe';
-import { getAuth } from 'firebase/auth';
-import { deleteDoc, doc, getDocs, getFirestore } from 'firebase/firestore';
-import { collectionData } from 'rxfire/firestore';
+import { deleteDoc, doc, getFirestore, setDoc, collection, updateDoc, addDoc } from 'firebase/firestore';
+import { docData } from 'rxfire/firestore';
 import { ICookie } from '../models/icookie';
 import { IPanier } from '../models/ipanier';
 import { AuthService } from './auth.service';
@@ -12,72 +10,88 @@ import { CookiesListService } from './cookies-list.service';
 @Injectable({
   providedIn: 'root'
 })
-export class PanierService {
+export class PanierService  {
 
-  listeDuPanier:Array<IPanier> = [];
+  constructor(private authService : AuthService, private cookieService: CookiesListService)  { }
 
-  //On récupère les id de chaque commande dans le panier ( 1 doc = 1 commande sur Firestore)
-  listeIdCommandes:Array<String> = [];
-
-
-  constructor(private authService : AuthService, private cookieService: CookiesListService) { }
-
+  
   db = getFirestore();
-  collection = collection(this.db, "panier");
-  nom= ''; 
+  collection = collection(this.db, "paniers");
 
-  async addOrder(idUser: string | undefined, idCookie:string,quantite:number,prix:number){
-    try {
-      const docRef = await addDoc(this.collection, {
-        idUser: idUser,
-        idCookie: idCookie,
-        quantite: quantite,
-        prix : prix
-      });
-      console.log("Document written with ID: ", docRef.id);
-    } catch (e) {
-      console.error("Error adding document: ", e);
+  idUtilisateur = this.authService.getUserId();
+  
+  async deletePanierUser(){
+    await deleteDoc(doc(this.db, "paniers", this.idUtilisateur));
+  }
+
+  getPanierByID(id:string){
+    const docRef = doc(this.db,`paniers/${id}`);
+    return docData(docRef, { idField: 'id' }) as unknown as Observable<IPanier>;
+  }
+
+  deleteCookiesPanier(panier: IPanier, index:number){
+
+    //On supprime les éléments de la liste liés au cookie choisi
+    panier.listeIdCookies.splice(index,1);
+    panier.listeNbCookies.splice(index,1);
+    panier.prixTotal -= panier.listePrixTotalParCookie[index];
+    panier.listePrixTotalParCookie.splice(index,1);
+
+    //Mise à jour dans la base de données
+    const docRef = doc(this.db,`paniers/${panier.id}`);
+    return updateDoc(docRef,{listeIdCookies: panier.listeIdCookies, listeNbCookies: panier.listeNbCookies, listePrixTotalParCookie: panier.listePrixTotalParCookie, prixTotal: panier.prixTotal})
+
+  }
+
+
+  ajouterCookiePanier(panier: IPanier, cookie: ICookie){
+    console.log("au moment d'ajouter");
+    console.log(panier);
+
+    //Cas où le cookie n'est pas encore dans le panier
+    if(!this.cookieEstDansLePanier(panier,cookie)){
+      panier.listeIdCookies.push(cookie.id);
+      panier.listeNbCookies.push(1);
+      panier.listePrixTotalParCookie.push(cookie.prix);
+      console.log(panier.prixTotal);
+      panier.prixTotal += cookie.prix;
+      console.log(panier.prixTotal);
+
+    }else{
+      const index = panier.listeIdCookies.indexOf(cookie.id);
+      panier.listeNbCookies[index] = 1 + this.getNbDeCeCookieDansLePanier(panier,cookie);
+      panier.listePrixTotalParCookie[index] = cookie.prix * panier.listeNbCookies[index];
+      panier.prixTotal += cookie.prix;
+    }
+  
+     //Mise à jour dans la base de données
+     const docRef = doc(this.db,`paniers/${panier.id}`);
+     return updateDoc(docRef,{listeIdCookies: panier.listeIdCookies, listeNbCookies: panier.listeNbCookies, listePrixTotalParCookie: panier.listePrixTotalParCookie, prixTotal: panier.prixTotal})    
+
+
+  }
+
+  cookieEstDansLePanier(panier: IPanier, cookie: ICookie){
+
+    console.log("panier : " );
+    console.log(panier);
+    console.log("cookie:");
+    console.log(cookie);
+
+   let res = panier.listeIdCookies.filter(res => res == cookie.id) 
+    
+    if(res.length>0){
+      return true;
+    }else {
+      return false; 
     }
   }
 
-  async getUserPanier(){
+  getNbDeCeCookieDansLePanier(panier: IPanier, cookie: ICookie){
+    const index = panier.listeIdCookies.indexOf(cookie.id);
+    const nbDeCeCookieActuel = panier.listeNbCookies[index];
+    return nbDeCeCookieActuel;
+  } 
 
-    var idUser = this.authService.getUserId();
-    const querySnapshot = await getDocs(this.collection);
-     
-     querySnapshot.forEach((doc) => {
-       this.listeDuPanier.push(doc.data() as IPanier);
-       this.listeIdCommandes.push(doc.id);
-     });  
-     
-
-     this.listeDuPanier = this.listeDuPanier.filter(x => x.idUser == idUser);
-
-
-     for (let i=0; i < this.listeDuPanier.length; i++){
-
-        this.listeDuPanier[i]["id"] = String(this.listeIdCommandes[i]);
-
-        
-        /* this.cookieService.getCookieById(this.listeDuPanier[i]["idCookie"]).then(
-          cookie => {
-            this.listeDuPanier[i]["nomCookie"] = cookie[0]["gout"];;
-          } ) */
-      }
-   }
-
-   async deleteCookiePanier(id: string){
-    await deleteDoc(doc(this.db, "panier", id));
-  }
-
-/* 
-  deleteCookiePanier(panier:IPanier[], cookie: ICookie){
-
-    if(panier.id==)
-    const docRef = doc(this.db, `panier/${panier.id}`);
-    return deleteDoc(docRef);
-  }
- */
-
-  
+ 
 }

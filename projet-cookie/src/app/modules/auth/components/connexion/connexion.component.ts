@@ -27,7 +27,7 @@ export class ConnexionComponent implements OnInit {
         if(this.authService.estAdmin()){
           this.router.navigate(['/admin'])
         }else{
-          this.router.navigate(['/cookies'])
+          this.router.navigate(['/profil'])
         }
       }) 
       .catch((e) => console.log(e.message));

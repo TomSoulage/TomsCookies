@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { deleteDoc, docSnapshots } from '@angular/fire/firestore';
-import { getFirestore, doc, setDoc, collection, getDoc, onSnapshot, DocumentReference, DocumentData, addDoc, getDocs } from 'firebase/firestore';
-import { list } from 'rxfire/database';
+import { deleteDoc } from '@angular/fire/firestore';
+import { getFirestore, doc, setDoc, collection, addDoc } from 'firebase/firestore';
 import { collectionData, docData } from 'rxfire/firestore';
 import { Observable } from 'rxjs';
 import { ICookie } from '../models/icookie';
@@ -15,7 +14,6 @@ export class CookiesListService {
   //Utiliser pour afficher la recette sur la liste des Cookies ( fonction avec bouton)
   listeAfficherRecette: Array<Boolean> = [];
 
-  cookie : Array<any> = [];
 
   data = []
   
@@ -44,6 +42,11 @@ export class CookiesListService {
     const docRef = doc(this.db, `cookies/${cookie.id}`);
     return setDoc(docRef, cookie);
   }
+
+  deleteCookie(cookie: ICookie){
+    const docRef = doc(this.db, `cookies/${cookie.id}`);
+    return deleteDoc(docRef);
+  }
   
   getCookies(): Observable<ICookie[]>{
     return collectionData(this.collection,{idField:'id'}) as Observable<ICookie[]>;
@@ -53,12 +56,6 @@ export class CookiesListService {
     const docRef = doc(this.db,`cookies/${id}`);
     return docData(docRef, { idField: 'id' }) as Observable<ICookie>;
   }
-
-  deleteCookie(cookie: ICookie){
-    const docRef = doc(this.db, `cookies/${cookie.id}`);
-    return deleteDoc(docRef);
-  }
-  
 
 
 }

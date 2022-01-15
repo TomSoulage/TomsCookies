@@ -1,8 +1,7 @@
 export interface IPanier {
     id: string;
-    idCookie: string;
-    nomCookie: string;
-    idUser: string; 
-    quantite: number;
-    prix: number;
+    listeIdCookies : Array<string>;
+    listeNbCookies: Array<number>;
+    listePrixTotalParCookie: Array<number>;
+    prixTotal: number;
 }

@@ -6,11 +6,21 @@
 .flex-container-tab {
     display: flex;
     justify-content: space-between;
+
     width: 100%;
 }
 
 .element-tab {
     width: 100px;
     text-align: center;
+    height: 50px;
+    vertical-align:middle;
+
 }
-   
+
+.element-tab img{
+    max-width: 100%;
+    max-height: 50px;
+}
+
+

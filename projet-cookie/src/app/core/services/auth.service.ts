@@ -8,10 +8,8 @@ import {
 
 import { Injectable } from '@angular/core';
 import { ILoginData } from '../models/ilogin-data';
-import { IUser } from '../models/iuser';
-import { getAuth } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
-import { error } from '@angular/compiler/src/util';
+import { doc, getDoc, getFirestore, setDoc } from 'firebase/firestore';
+import { PanierService } from './panier.service';
 
 @Injectable({
   providedIn: 'root',
@@ -28,13 +26,34 @@ export class AuthService {
   }
 
   register({ email, password }: ILoginData) {
+   
      return createUserWithEmailAndPassword(this.auth, email, password)
-     .then(() => {
-       this.logout();
-     });
+    .then(() => {
+      
+      if(this.auth.currentUser!=null){
+        this.creationPanierUtilisateur(this.auth.currentUser.uid).then(
+          ()=> {this.logout();
+          })
+      }else{
+        this.logout();
+      }
+    })
+   
      //gestion suppression page connexion quand on est déjà connecté
   }
 
+ async creationPanierUtilisateur(id:string){
+    if(id!='noId'){
+      await setDoc(doc(this.db, "paniers",id), {
+        listeIdCookies: [""],
+        listeNbCookies: [0],
+        listePrixTotalParCookie: [0],
+        prixTotal: 0
+      });
+    }
+    console.log("c'est créé");
+  } 
+  
   logout() {
     return signOut(this.auth);
   }
@@ -59,22 +78,25 @@ export class AuthService {
 
 
   getUserId() {
-      return this.auth.currentUser?.uid; 
+    if(this.auth.currentUser!=null){
+      return this.auth.currentUser.uid; 
+    }else {
+      return "noId";
+    }
   }
 
+  
 
   getEmail() {
     return this.auth.currentUser?.email; 
   }
 
   getDateCreationCompte(){
-    console.log(this.auth.currentUser?.metadata.lastSignInTime);
     return this.auth.currentUser?.metadata.creationTime;
   }
 
   getDerniereConnexion(){
     return this.auth.currentUser?.metadata.lastSignInTime;
   }
-
 
 }

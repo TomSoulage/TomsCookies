@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ILoginData } from 'src/app/core/models/ilogin-data';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { PanierService } from 'src/app/core/services/panier.service';
 
 @Component({
   selector: 'app-inscription',
@@ -10,7 +11,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class InscriptionComponent implements OnInit {
 
-  constructor(   private readonly authService: AuthService, private readonly router: Router) { }
+  constructor(   private readonly authService: AuthService, private readonly router: Router, private panierService: PanierService) { }
 
   ngOnInit(): void {
   }
@@ -21,4 +22,7 @@ export class InscriptionComponent implements OnInit {
       .then(() => this.router.navigate(['/connexion']))
       .catch((e) => console.log(e.message));
   }
+
+
+
 }
