@@ -6,15 +6,18 @@ import { AuthService } from 'src/app/core/services/auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AdminGuard implements CanActivate, CanActivateChild, CanDeactivate<unknown>, CanLoad {
-
+export class AuthGuard implements CanActivate, CanActivateChild, CanDeactivate<unknown>, CanLoad {
+  
   constructor(private authService: AuthService, private router: Router){};
 
   canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree { 
-      if(this.authService.estAdmin()){ return true;}
-      else{ return this.router.navigate(['']); }
+    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+      if(this.authService.estConnecte()){
+       return true; 
+      }else{
+        return  this.router.navigate([('/connexion')]);
+      }
   }
   canActivateChild(
     childRoute: ActivatedRouteSnapshot,

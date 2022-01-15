@@ -21,7 +21,6 @@ import {MatListModule} from '@angular/material/list';
 import {MatTableModule} from '@angular/material/table';
 
 
-import { AuthModule } from '@angular/fire/auth';
 
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
@@ -35,7 +34,6 @@ import { provideMessaging,getMessaging } from '@angular/fire/messaging';
 import { providePerformance,getPerformance } from '@angular/fire/performance';
 import { provideRemoteConfig,getRemoteConfig } from '@angular/fire/remote-config';
 import { provideStorage,getStorage } from '@angular/fire/storage';
-import { AddCookieComponent } from './modules/admin/components/add-cookie/add-cookie.component';
 import { PanierComponent } from './pages/panier/panier.component';
 
 @NgModule({
@@ -45,12 +43,10 @@ import { PanierComponent } from './pages/panier/panier.component';
     HeaderComponent,
     FooterComponent,
     CookiesComponent,
-    AddCookieComponent,
     PanierComponent,
   ],
   imports: [
     BrowserModule,
-    AuthModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,

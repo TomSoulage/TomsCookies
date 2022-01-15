@@ -10,9 +10,9 @@
           
        
 
-        <button mat-raised-button color="primary" [routerLink]="['/update-cookie', c.id]"  > Modifier</button>
+        <button mat-raised-button color="primary" [routerLink]="['update-cookie', c.id]"  > Modifier</button>
         <button mat-raised-button color="warn" type="checkbox" (click)="delete(c)"> Supprimer</button>
       </div>
     </mat-card>
 </div>    
-      
+<router-outlet></router-outlet>

@@ -17,14 +17,13 @@ import { error } from '@angular/compiler/src/util';
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(public auth: Auth) {}
+  constructor(private auth: Auth) {}
 
   userData: any;
   db = getFirestore();
 
 
   login({ email, password }: ILoginData) {
-
     return signInWithEmailAndPassword(this.auth, email, password);
   }
 
@@ -42,19 +41,39 @@ export class AuthService {
   
   estConnecte() {
 
-    const auth = getAuth();
-    const user = auth.currentUser;    
-
-    if (user!=null) {
+    if (this.auth.currentUser!=null) {
         return true;
     }
       return false;
 
   }
 
+
+  estAdmin(){    
+    if((this.auth.currentUser?.uid=="5nzQrtyZTOVzaKLWjNQB60rthmz2") && (this.auth.currentUser?.email=="admin@gmail.com")){
+      return true;  
+    }else {
+      return false; 
+    }
+  }
+
+
   getUserId() {
-      return this.auth.currentUser?.uid;
- 
+      return this.auth.currentUser?.uid; 
+  }
+
+
+  getEmail() {
+    return this.auth.currentUser?.email; 
+  }
+
+  getDateCreationCompte(){
+    console.log(this.auth.currentUser?.metadata.lastSignInTime);
+    return this.auth.currentUser?.metadata.creationTime;
+  }
+
+  getDerniereConnexion(){
+    return this.auth.currentUser?.metadata.lastSignInTime;
   }
 
 

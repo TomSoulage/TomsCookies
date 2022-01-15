@@ -5,14 +5,68 @@
 
 .cookies-list{
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  flex-wrap: wrap;
   width: auto;
   margin: 15px auto;
   width: 1000px;
+}
+
+.cookies-list .mat-card{
+  padding-bottom: 0;
+  margin: 10px;
+}
+
+
+.cookie-img {
+  margin-bottom: 0px;
 }
 
 .flex-buttons{
   display: flex;
   justify-content: space-around;
   width: auto;
+}
+
+.cookies-list .mat-card-title-group{
+  display: block;
+  font-family: Copperplate, Papyrus, fantasy;
+}
+
+.cookies-list .mat-card-title{
+  text-align: center;
+  height: 35px;
+  font-size: 35px;
+  margin-bottom: 25px;
+  border-bottom: 2px  ridge rgba(0,0,0,.12);;
+}
+
+.cookies-list .mat-card-subtitle{
+  text-align: center;
+  font-size: 25px;
+}
+
+.cookie-prix{
+    font-size: 25px;
+    display: block;
+    width: 60px;
+    text-align: center;
+    font-family: Copperplate, Papyrus, fantasy;
+    color: white;
+    padding-top: 25px;
+    margin: auto 0;
+  }
+
+.div-cookie-prix{
+  display: block;
+  margin-left: 150px;
+  width: 60px;
+  height: 50px;
+
+  background-image: url('../../../assets/images/theme/old-price.png');
+  background-size: 100%;
+}
+
+.div-cookie-prix img{
+  max-width: 100%;
 }

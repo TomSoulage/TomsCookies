@@ -1,0 +1,19 @@
+<mat-card>
+    <mat-toolbar color="primary">
+       Mon profil
+    </mat-toolbar>  
+    <mat-tab-group>
+        <mat-tab label="Mes informations"> 
+            <mat-card class="exemple-card">
+                <mat-card-header>
+                <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title>Email : {{afficherEmail()}}</mat-card-title>
+                <mat-card-subtitle> Date de création de compte : {{afficherDateCreationCompte()}}</mat-card-subtitle>
+                <mat-card-subtitle> Dernière connexion : {{afficherDerniereConnexion()}}</mat-card-subtitle>
+
+            </mat-card-header>    
+            </mat-card>
+        </mat-tab>
+        <mat-tab label="Mes commandes"> </mat-tab>
+      </mat-tab-group>
+</mat-card>

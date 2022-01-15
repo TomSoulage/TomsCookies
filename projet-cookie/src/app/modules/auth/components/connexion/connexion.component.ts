@@ -23,7 +23,13 @@ export class ConnexionComponent implements OnInit {
   login(loginData: ILoginData) {
     this.authService
       .login(loginData)
-      .then(() => this.router.navigate(['/cookies']))
+      .then(() => {
+        if(this.authService.estAdmin()){
+          this.router.navigate(['/admin'])
+        }else{
+          this.router.navigate(['/cookies'])
+        }
+      }) 
       .catch((e) => console.log(e.message));
   }
   

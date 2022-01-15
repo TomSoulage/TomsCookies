@@ -3,15 +3,20 @@
   <mat-card *ngFor="let c of cookies; index as indexOfElement" class="example-card">
     <mat-card-title-group>
       <mat-card-title> {{c.gout}} </mat-card-title>
-      <mat-card-subtitle> {{c.prix}} € </mat-card-subtitle>
-      <img mat-card-xl-image src="{{c.image}}" >
+      <img class="cookie-img" mat-card-xl-image src="{{c.image}}" >
+
     </mat-card-title-group>
-    
-    
+         
     <div class="flex-buttons">
       <button mat-raised-button color="primary"  (click)="afficherRecette(indexOfElement)" type="checkbox" >  <mat-icon>subtitles</mat-icon> Recette</button>
       <button mat-raised-button color="secondary" type="checkbox"> <mat-icon>add_shopping_cart</mat-icon>  Ajouter </button>         
     </div>
+
+    <div class="div-cookie-prix">  <div class="cookie-prix"> {{c.prix}} € </div>  
+    </div>
+  
+
+   
 
   
   <div *ngIf="estAfficher(indexOfElement)" class="row container-fluid" >

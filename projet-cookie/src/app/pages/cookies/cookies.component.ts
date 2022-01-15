@@ -59,7 +59,7 @@ export class CookiesComponent implements OnInit {
       res => this.cookies = res
     );
     console.log(this.cookies);
-    //this.createForm();
+
   }
 
 }

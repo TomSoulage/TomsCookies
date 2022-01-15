@@ -12,12 +12,16 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { ProfilComponent } from './components/profil/profil.component';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
     ConnexionComponent,
     FormulaireUserComponent,
-    InscriptionComponent
+    InscriptionComponent,
+    ProfilComponent
   ],
   imports: [
     CommonModule,
@@ -28,7 +32,9 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatFormFieldModule,
     MatCardModule,
     MatIconModule,
-    MatGridListModule
+    MatGridListModule,
+    MatToolbarModule,
+    MatTabsModule
   ]
 })
 export class AuthModule { }

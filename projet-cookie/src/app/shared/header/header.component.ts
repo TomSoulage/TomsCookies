@@ -17,6 +17,14 @@ export class HeaderComponent implements OnInit {
     return this.authService.estConnecte();
   }
 
+  estAdmin(){
+    return this.authService.estAdmin();
+  }
+
+  estUserClassique(){
+    return ((this.authService.estConnecte()) &&  !(this.authService.estAdmin()))
+  }
+
   deconnexion(){
     this.authService
       .logout()

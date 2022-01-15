@@ -1,0 +1,13 @@
+.example-card {
+    max-width: 400px;
+  }
+  
+.example-header-image {
+    background-image: url('../../../../../assets/images/theme/user-picture.png');
+    background-size: cover;
+}
+
+.mat-card-avatar {
+    height: 70px;
+    width: 70px;
+}

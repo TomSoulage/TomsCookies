@@ -14,15 +14,18 @@ import {MatTableModule} from '@angular/material/table';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { CookiesManagementComponent } from './components/cookies-management/cookies-management.component';
-import { RouterModule } from '@angular/router';
+import { AddCookieComponent } from './components/add-cookie/add-cookie.component';
+import { AdminRoutingModule } from './admin-routing.module';
 
 @NgModule({
   declarations: [
     UpdateCookieComponent,
     CookiesManagementComponent,
+    AddCookieComponent
   ],
   imports: [
     CommonModule,
+    AdminRoutingModule,
     MatCardModule,
     MatButtonModule,
     MatToolbarModule,
@@ -32,7 +35,6 @@ import { RouterModule } from '@angular/router';
     MatInputModule,
     MatListModule,
     MatTableModule,
-    RouterModule,
     ReactiveFormsModule
   ]
 })
