@@ -18,7 +18,7 @@
 
     <mat-list>
         <mat-list-item *ngFor="let cookie of panier.listeIdCookies;let indexOfElement=index"> 
-            <div *ngIf="indexOfElement>0" class="flex-container-tab"> 
+            <div *ngIf="indexOfElement>0" class="flex-container-taprimaryprimaryb"> 
                     <div class="element-tab"> <img class="image-panier" src="{{getCookieImage(cookie)}}"/>   </div>  
                     <div class="element-tab"> <span> {{getCookieName(cookie)}} </span>  </div>  
                     <div class="element-tab"> {{this.panier.listeNbCookies[indexOfElement]}}</div> 

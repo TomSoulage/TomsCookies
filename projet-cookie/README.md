@@ -5,11 +5,10 @@ Ce projet est réalisé dans le cadre de la matière Cloud Frond à Cy-Tech Pau.
 
 Avant de lancer le projet, vous devez avoir les configurations/installations suivantes : 
 * 1. NodeJS : 16.13.0 
-* 2. Angular CLI 13.0. ( npm install -g @angular/cli )
-* Firebase : 3.2.1 ( ng add @angular/fire -> sélectionner toutes les features (ici Authentication et Firestore Database) )
-* AngularFire : 7.2
-* NPM Version: 8.3.0 ( npm update )
-e projet utilise la version 13.0.3 d'Angular. 
+* 2. Angular CLI 13.0.3 ( npm install -g @angular/cli )
+
+
+Le projet utilise la version 13.0.3 d'Angular. 
 Le design a été fait avec angular material. 
 Le back a été fait avec firebase
 

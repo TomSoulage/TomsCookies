@@ -5,13 +5,13 @@ footer {
     bottom: 0;
     width: 100%;
     text-align: center;
-    background-color: #3f51b5;
+    background-color: #3e2723 ;
     color: white;
     padding-bottom: 20px;
     padding-top: 20px;
-    background-image: url('../../../assets/images/cookie-background2.jpg');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 100%;
+}
+
+.footer-logo {
+    width: 100px;
 }
 
