@@ -6,31 +6,31 @@ import { AuthService } from 'src/app/core/services/auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AdminGuard implements CanActivate, CanActivateChild, CanDeactivate<unknown>, CanLoad {
+export class AdminGuard implements CanActivate{
 
   constructor(private authService: AuthService, private router: Router){};
 
-  canActivate(
+  async canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree { 
-      if(this.authService.estAdmin()){ return true;}
-      else{ return this.router.navigate(['']); }
-  }
-  canActivateChild(
-    childRoute: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
-  }
-  canDeactivate(
-    component: unknown,
-    currentRoute: ActivatedRouteSnapshot,
-    currentState: RouterStateSnapshot,
-    nextState?: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
-  }
-  canLoad(
-    route: Route,
-    segments: UrlSegment[]): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
+    state: RouterStateSnapshot): Promise<boolean | UrlTree>  {
+      const user = await this.authService.getCurrentUserIsAdmin();
+      let estConnecte = false; 
+      let accesRoute = false; 
+
+      //Vérification de la connexion
+      if(user!=null){
+        estConnecte = true; 
+        accesRoute = true; 
+      }else{
+        estConnecte = false;
+        accesRoute = false; 
+      }
+
+      if(!accesRoute){
+        this.router.navigate(['/accueil']);
+        return false; 
+      }else{
+        return true; 
+      }  
   }
 }

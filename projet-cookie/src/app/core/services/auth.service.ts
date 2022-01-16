@@ -2,28 +2,51 @@
 import {
   Auth,
   createUserWithEmailAndPassword,
+  getAuth,
   signInWithEmailAndPassword,
   signOut,
 } from '@angular/fire/auth';
 
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { ILoginData } from '../models/ilogin-data';
 import { doc, getDoc, getFirestore, setDoc } from 'firebase/firestore';
 import { PanierService } from './panier.service';
+import { ResolveEnd, Router } from '@angular/router';
+import { browserSessionPersistence, onAuthStateChanged, setPersistence } from 'firebase/auth';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private auth: Auth) {}
+  constructor(private auth: Auth) {
+  }
+
 
   userData: any;
   db = getFirestore();
 
+  verif(){
+        // Listen for authentication state to change.
+    onAuthStateChanged(this.auth, user => {
+      if (user != null) {
+       return true; 
+      }else{
+        return false;
+      }
+    
+      // Do other things
+    });
+    return false; 
+  }
+
+
+  
 
   login({ email, password }: ILoginData) {
     return signInWithEmailAndPassword(this.auth, email, password);
   }
+
+
 
   register({ email, password }: ILoginData) {
    
@@ -59,14 +82,37 @@ export class AuthService {
   }
   
   estConnecte() {
-
-    if (this.auth.currentUser!=null) {
+      if (this.auth.currentUser!=null) {
         return true;
-    }
-      return false;
-
+      }else{
+        return false;
+      }
   }
 
+  // Utiliser pour les guards
+  getCurrentUser() {
+    return new Promise((resolve, reject) => {
+       const unsubscribe = this.auth.onAuthStateChanged(user => {
+          unsubscribe();
+          resolve(user);
+          console.log(user);
+       }, reject);
+    });
+  }
+
+  //Utiliser pour les guards
+  getCurrentUserIsAdmin() {
+    return new Promise((resolve, reject) => {
+       const unsubscribe = this.auth.onAuthStateChanged(user => {
+          unsubscribe();
+          if((user?.uid=="5nzQrtyZTOVzaKLWjNQB60rthmz2")&& (user?.email=="admin@gmail.com")){
+            resolve(user);
+          }else{
+            resolve(null);
+          }
+       }, reject);
+    });
+  }
 
   estAdmin(){    
     if((this.auth.currentUser?.uid=="5nzQrtyZTOVzaKLWjNQB60rthmz2") && (this.auth.currentUser?.email=="admin@gmail.com")){
@@ -84,8 +130,6 @@ export class AuthService {
       return "noId";
     }
   }
-
-  
 
   getEmail() {
     return this.auth.currentUser?.email; 

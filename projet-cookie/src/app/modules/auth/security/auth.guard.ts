@@ -1,39 +1,59 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, CanDeactivate, CanLoad, Route, Router, RouterStateSnapshot, UrlSegment, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate, CanActivateChild, CanDeactivate<unknown>, CanLoad {
+export class AuthGuard implements CanActivate{
   
   constructor(private authService: AuthService, private router: Router){};
 
-  canActivate(
+  async canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      if(this.authService.estConnecte()){
-       return true; 
+    state: RouterStateSnapshot): Promise<boolean | UrlTree>  {
+      const user = await this.authService.getCurrentUser();
+      let estConnecte = false; 
+      let accesRoute = false; 
+
+      //Vérification de la connexion
+      if(user!=null){
+        estConnecte = true; 
       }else{
-        return this.router.navigate([('/connexion')]);
+        estConnecte = false; 
+      }
+
+      console.log("page : ");
+      console.log(state.url);
+      console.log("connexion : ");
+      console.log(estConnecte);
+      
+      if(estConnecte){
+        if( (state.url=="/connexion") || (state.url=="/inscription")) {
+          accesRoute = false; 
+        }else{
+          accesRoute = true; 
+        }
+      }else{
+        if( (state.url=="/connexion") || (state.url=="/inscription")) {
+          accesRoute = true; 
+        }else{
+          accesRoute = false; 
+        }
+      } 
+
+      console.log("connexion : ");
+      console.log(estConnecte);
+      console.log("accès route");
+      console.log(accesRoute);
+
+      if(!accesRoute){
+        this.router.navigate(['/accueil']);
+        return false; 
+      }else{
+        return true; 
       }
   }
-  canActivateChild(
-    childRoute: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
-  }
-  canDeactivate(
-    component: unknown,
-    currentRoute: ActivatedRouteSnapshot,
-    currentState: RouterStateSnapshot,
-    nextState?: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
-  }
-  canLoad(
-    route: Route,
-    segments: UrlSegment[]): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
-  }
+
 }
