@@ -5,7 +5,6 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { FormulaireUserComponent } from './components/formulaire-user/formulaire-user.component';
 import { InscriptionComponent } from './components/inscription/inscription.component';
 import { ConnexionComponent } from './components/connexion/connexion.component';
-import { CommandesComponent } from './components/commandes/commandes.component';
 import { ProfilComponent } from './components/profil/profil.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
@@ -26,7 +25,6 @@ import {MatTabsModule} from '@angular/material/tabs';
     FormulaireUserComponent,
     InscriptionComponent,
     ProfilComponent,
-    CommandesComponent
   ],
   imports: [
     CommonModule,

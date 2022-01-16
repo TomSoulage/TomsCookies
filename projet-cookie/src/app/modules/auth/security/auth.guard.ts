@@ -23,11 +23,6 @@ export class AuthGuard implements CanActivate{
       }else{
         estConnecte = false; 
       }
-
-      console.log("page : ");
-      console.log(state.url);
-      console.log("connexion : ");
-      console.log(estConnecte);
       
       if(estConnecte){
         if( (state.url=="/connexion") || (state.url=="/inscription")) {
@@ -42,11 +37,6 @@ export class AuthGuard implements CanActivate{
           accesRoute = false; 
         }
       } 
-
-      console.log("connexion : ");
-      console.log(estConnecte);
-      console.log("accès route");
-      console.log(accesRoute);
 
       if(!accesRoute){
         this.router.navigate(['/accueil']);

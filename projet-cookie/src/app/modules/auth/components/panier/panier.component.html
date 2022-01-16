@@ -1,4 +1,4 @@
-<div class="titre-page"> <span> Mon Panier  </span></div>
+<div class="titre-page"> <span> Mon Panier </span></div>
 
    <div class="div-panier-table" *ngIf="panier.listeIdCookies.length > 1 "  >
         <table class="panier-table">
@@ -10,26 +10,24 @@
               <th>Supprimer</th>
             </tr>
             <tr *ngFor="let cookie of panier.listeIdCookies;let indexOfElement=index">
-                    <td *ngIf="indexOfElement>0"> <img class="cookie-img-tab" mat-card-xl-image src="{{getCookieImage(cookie)}}" ></td>
+     <td *ngIf="indexOfElement>0"> <img class="cookie-img-tab" mat-card-xl-image src="{{getCookieImage(cookie)}}" ></td>
                     <td *ngIf="indexOfElement>0"> <span> {{getCookieName(cookie)}} </span></td>
                     <td *ngIf="indexOfElement>0"> {{this.panier.listeNbCookies[indexOfElement]}}</td>
                     <td *ngIf="indexOfElement>0">{{this.panier.listePrixTotalParCookie[indexOfElement]}} </td>
-                    <td *ngIf="indexOfElement>0">   <button mat-raised-button color="warn" type="checkbox" (click)="delete(indexOfElement)" > Supprimer</button> </td>
+                    <td *ngIf="indexOfElement>0">   <button mat-raised-button color="accent" type="checkbox" (click)="delete(indexOfElement)" > <mat-icon>delete</mat-icon></button> </td>
             </tr>
           
           </table>
     
           <div class="div-panier-end">
             <div class="add-button-div button">
-                <button mat-raised-button color="accent">  Prix total:  {{panier.prixTotal}} <mat-icon>euro_symbol</mat-icon> </button> 
+                <button mat-raised-button color="accent">  Prix total:  {{panier.prixTotal}} €</button> 
              </div>
               <div class="add-button-div">
-                <button mat-raised-button color="primary" (click)="validerCommande(this.panier)">Commander <mat-icon>check</mat-icon></button> 
+                <button mat-raised-button color="primary" (click)="validerCommande(this.panier)">Commander</button> 
               </div>
           </div>
-    
-          
-   
+  </div>
 
     <div *ngIf="panier.listeIdCookies.length==1" >
         <span><img class="img-resp" src="../../../../../assets/images/theme/panier-vide.png"></span>

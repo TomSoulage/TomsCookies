@@ -42,17 +42,13 @@ export class PanierService  {
 
 
   ajouterCookiePanier(panier: IPanier, cookie: ICookie){
-    console.log("au moment d'ajouter");
-    console.log(panier);
 
     //Cas où le cookie n'est pas encore dans le panier
     if(!this.cookieEstDansLePanier(panier,cookie)){
       panier.listeIdCookies.push(cookie.id);
       panier.listeNbCookies.push(1);
       panier.listePrixTotalParCookie.push(cookie.prix);
-      console.log(panier.prixTotal);
       panier.prixTotal += cookie.prix;
-      console.log(panier.prixTotal);
 
     }else{
       const index = panier.listeIdCookies.indexOf(cookie.id);

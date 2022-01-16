@@ -51,25 +51,6 @@ export class CookiesComponent implements OnInit {
     }
   }
 
-  //Panier
-  formGroup: FormGroup | any;
-  titleAlert: string = 'This field is required';
-  post: any = '';
-  
-  createForm() {
-    this.formGroup = this.formBuilder.group({
-      'quantite': [null, [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
-      'validate': ''
-    });
-  }
-
-  onSubmit(index: number,id: string, post:any) {
-    this.post = post;
-    console.log(post);
-    var idUser = this.authService.getUserId()
-  } 
-
-
   ngOnInit() {
 
     this.cookiesService.getCookies().subscribe(

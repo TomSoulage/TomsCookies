@@ -1,61 +1,63 @@
-<mat-card class="card-mon-profil">
-    <mat-toolbar color="accent">
-       Mon profil
-    </mat-toolbar>  
-    <mat-tab-group>
-        <mat-tab label="Mes informations"> 
-            <mat-card class="exemple-card">
-                <mat-card-header>
-                <div mat-card-avatar class="example-header-image"></div>
-                <mat-card-title>Email : {{afficherEmail()}}</mat-card-title>
-                <mat-card-subtitle> Date de création de compte : {{afficherDateCreationCompte()}}</mat-card-subtitle>
-                <mat-card-subtitle> Dernière connexion : {{afficherDerniereConnexion()}}</mat-card-subtitle>
+<div class="titre-page"> <span> Mon Profil</span></div>
 
-            </mat-card-header>    
-            </mat-card>
-        </mat-tab>
-        <mat-tab label="Mes commandes"> 
-            <div *ngIf="this.commandes.length > 0 "  >
-                <div *ngFor="let commande of commandes;let indexOfElement=index">
-                    <mat-accordion>
-                        <mat-expansion-panel hideToggle>
-                          <mat-expansion-panel-header>
-                            <mat-panel-title>
-                             Commande #{{indexOfElement}}
-                            </mat-panel-title>
-                            <mat-panel-description>
-                                {{commande.prixTotal}} €
-                              </mat-panel-description>
-                              <mat-panel-description>
-                                {{commande.date}}
-                              </mat-panel-description>
-                          </mat-expansion-panel-header>
-                          <table class="panier-table">
-                            <tr >
-                            <th>Cookie</th>
-                            <th>Quantité</th>
-                            <th>Prix total par Cookie </th>
-                            </tr>
-                            <tr class="table-c" *ngFor="let cookie of commande.listeIdCookies;let indexOfElement2=index" >
-                                <td *ngIf="indexOfElement2>0"> {{getCookieName(cookie)}} </td>
-                                <td *ngIf="indexOfElement2>0"> {{commande.listeNbCookies[indexOfElement2]}}</td>
-                                <td *ngIf="indexOfElement2>0">  {{commande.listePrixTotalParCookie[indexOfElement2]}} € </td>                            
-                            </tr>
+<div class="card-mon-profil" >
+    <mat-card >
+        <mat-tab-group>
+            <mat-tab label="Mes informations"> 
+                <mat-card class="exemple-card">
+                    <mat-card-header>
+                    <div mat-card-avatar class="example-header-image"></div>
+                    <mat-card-title>Email : {{afficherEmail()}}</mat-card-title>
+                    <mat-card-subtitle> Date de création de compte : {{afficherDateCreationCompte()}}</mat-card-subtitle>
+                    <mat-card-subtitle> Dernière connexion : {{afficherDerniereConnexion()}}</mat-card-subtitle>
+    
+                </mat-card-header>    
+                </mat-card>
+            </mat-tab>
+            <mat-tab label="Mes commandes"> 
+                <div *ngIf="this.commandes.length > 0 "  >
+                    <div *ngFor="let commande of commandes;let indexOfElement=index">
+                        <mat-accordion>
+                            <mat-expansion-panel>
+                              <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    Commande #{{indexOfElement+1}}                                
+                                </mat-panel-title>
+                                <mat-panel-description>
+                                    {{commande.prixTotal}} €
+                                  </mat-panel-description>
+                                  <mat-panel-description>
+                                    {{commande.date}}
+                                  </mat-panel-description>
+                              </mat-expansion-panel-header>
+                              <table class="panier-table">
+                                <tr >
+                                <th>Cookie</th>
+                                <th>Quantité</th>
+                                <th>Prix total par Cookie </th>
+                                </tr>
+                                <tr class="table-c" *ngFor="let cookie of commande.listeIdCookies;let indexOfElement2=index" >
+                                    <td *ngIf="indexOfElement2>0"> {{getCookieName(cookie)}} </td>
+                                    <td *ngIf="indexOfElement2>0"> {{commande.listeNbCookies[indexOfElement2]}}</td>
+                                    <td *ngIf="indexOfElement2>0">  {{commande.listePrixTotalParCookie[indexOfElement2]}} € </td>                            
+                                </tr>
+    
+                            </table>
+                            </mat-expansion-panel>
+                          </mat-accordion>
+                        
+    
+                </div>
+            
+                <div *ngIf="this.commandes.length==0" >
+                    <span>Aucune commande</span>
+                </div>
+    
+                </div>
+            </mat-tab>
+          </mat-tab-group>
+    </mat-card>
+</div>
 
-                        </table>
-                        </mat-expansion-panel>
-                      </mat-accordion>
-                    
-
-            </div>
-        
-            <div *ngIf="this.commandes.length==0" >
-                <span>Aucune commande</span>
-            </div>
-
-            </div>
-        </mat-tab>
-      </mat-tab-group>
-</mat-card>
 
 

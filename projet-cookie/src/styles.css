@@ -31,8 +31,13 @@ footer {position: absolute; bottom: 0; left: 0; right: 0; margin-top:10px;}
 
 .titre-page span{
   text-align: center;
-  font-size: 25px;
+  font-size: 50px;
   font-family: Copperplate;
   display: block;
-  margin-top: 25px;
+  color: #3e2723;
+  border-bottom: #a1887f 1px  inset;;
+  width: 600px;
+  margin: auto;
+  padding-bottom: 20px;
+  margin-top: 40px;
 }

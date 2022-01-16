@@ -58,25 +58,9 @@ export class CommandeService {
     return collectionData(q,{idField:'id'}) as Observable<ICommande[]>;
   }
 
-  /*getCommandeOfAUser(){
-    const q = query(collection(db, "commandes"), where("idUtilisateur", "==", true));
-
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
-      console.log(doc.id, " => ", doc.data());
-    });
-  } */
-
-
   getCommandeByID(id:string){
     const docRef = doc(this.db,`commandes/${id}`);
     return docData(docRef, { idField: 'id' }) as Observable<ICommande>;
   }
-
-
- 
-  
-
 
 }

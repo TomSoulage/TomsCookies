@@ -32,7 +32,6 @@ export class AddCookieComponent implements OnInit {
 
   onSubmit(post: any) {
     this.post = post;
-    console.log(post);
     this.cookiesListeService.addCookie(post['gout'],post['prix'],post['recette'],post['image']);
     this.snackBar.open("Cookie ajouté ! ",'Fermer', {"duration": 7000,panelClass: ["sb-success"]});
     this.router.navigate(['/admin']);

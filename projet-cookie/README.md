@@ -1,17 +1,97 @@
-# Tom's Cookies
+# Tom's Cookies Project
 
-Ce projet est réalisé dans le cadre de la matière Cloud Frond à Cy-Tech Pau.
+Ce projet est réalisé dans le cadre de la matière Cloud Front à Cy-Tech Pau.
 
 
 Avant de lancer le projet, vous devez avoir les configurations/installations suivantes : 
 * 1. NodeJS : 16.13.0 
 * 2. Angular CLI 13.0.3 ( npm install -g @angular/cli )
 
+Une fois NodeJS et Angular insatallés : 
 
-Le projet utilise la version 13.0.3 d'Angular. 
-Le design a été fait avec angular material. 
-Le back a été fait avec firebase
+```
+ng serve
+```
 
+Ensuite rendez-vous en local : 
+http://localhost:4200/accueil
+
+---
+
+Les outils utilisées : 
+* Back : Firebase
+* Design : Angular Material
+
+
+Le site **Tom's Cookie** est une simulation de boutique de ventes de cookie. 
+
+Connexion admin : 
+
+* email : admin@gmail.com
+* mdp : admin123
+
+Connexion utilisateur lambda ayant passé plusieurs commandes :
+
+* email : user@gmail.com
+* mdp : user123
+
+--- 
+
+Fonctionnalités : 
+
+* *Everybody* :
+    * Visiter la boutique Tom's Cookie
+    * S'inscrire
+
+* *Admin* :
+    * Ajouter / Supprimer / Mettre à jour des cookies
+
+* *Utilisateur* :
+    * Se connecter
+    * Ajouter des cookies à son panier 
+    * Valider une commande 
+    * Consulter son profil 
+    * Consulter l'historique de ses commandes 
+
+
+
+---
+
+
+L'architecture du projet :
+
+* *core* :
+    * *models* : fichiers d'interface
+    * *services* : services
+* *modules* :
+    * *admin* : Partie admin
+        * *components* :
+            * *add-cookie*: Ajout d'un cookie
+            * *cookies-management* : Gestion des cookies
+            * *update-cookie* : Mise à jour informations d'un cookie
+        * *security* : Guard admin
+    * *auth* : Partie authentification
+        * *components* :
+            * *connexion*: Partie connexion
+            * *formulaire-user* : Formulaire utilisateur commun Connexion / Inscription
+            * *panier* : Gestion panier utilisateur
+            * *profil* : Gestion profil utilisateur
+        * *security* : Guard auth
+* *pages* :
+    * *accueil* 
+    * *cookies* 
+    * *erreur404*
+* *shared* :
+    * *footer*
+    * *header*
+* *assets* :
+    * *images* :
+        * *theme* 
+        * *cookies* : photo des cookies de la boutique
+    
+    
+
+---
 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.0.3.

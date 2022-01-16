@@ -71,7 +71,6 @@ export class AuthService {
         prixTotal: 0
       });
     }
-    console.log("c'est créé");
   } 
   
   logout() {
@@ -92,7 +91,6 @@ export class AuthService {
        const unsubscribe = this.auth.onAuthStateChanged(user => {
           unsubscribe();
           resolve(user);
-          console.log(user);
        }, reject);
     });
   }

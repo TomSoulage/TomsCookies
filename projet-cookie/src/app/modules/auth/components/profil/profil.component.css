@@ -2,7 +2,7 @@
     max-width: 400px;
   }
 
-#card-mon-profil{
+.card-mon-profil{
     width: 800px;
     max-width: 100%;
     display: block;

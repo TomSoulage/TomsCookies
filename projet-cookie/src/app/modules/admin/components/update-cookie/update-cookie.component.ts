@@ -58,7 +58,6 @@ export class UpdateCookieComponent implements OnInit {
 
   onSubmit(post: any,) {
     this.post = post;
-    console.log(post);
     let newCookie: ICookie = {
       id : this.cookie.id,
       gout : post['gout'],
