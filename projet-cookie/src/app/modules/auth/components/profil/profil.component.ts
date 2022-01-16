@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { getFirestore } from '@angular/fire/firestore';
-import { timeStamp } from 'console';
-import { doc, getDoc } from 'firebase/firestore';
-import { IPanier } from 'src/app/core/models/ipanier';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { CommandeService } from 'src/app/core/services/commande.service';
 import { PanierService } from 'src/app/core/services/panier.service';
+import { ICommande } from 'src/app/core/models/icommande';
+import { CookiesListService } from 'src/app/core/services/cookies-list.service';
+import { ICookie } from 'src/app/core/models/icookie';
 
 @Component({
   selector: 'app-profil',
@@ -13,10 +13,26 @@ import { PanierService } from 'src/app/core/services/panier.service';
 })
 export class ProfilComponent implements OnInit {
 
-  constructor(private authService: AuthService, private panierService: PanierService) { }
+  commandes: ICommande[] = [];
+  cookies:ICookie[] = [];
+
+  panelOpenState = false;
+
+  constructor(private authService: AuthService, private panierService: PanierService,private commandeService: CommandeService,private cookieService: CookiesListService) { }
   
-  
+
   ngOnInit(): void {
+    this.cookieService.getCookies().subscribe(
+      res => this.cookies = res
+    );
+    this.commandeService.getCommandes().subscribe(
+      res =>  {this.commandes=res} 
+    )
+    this.commandeService.getCommandes().subscribe(
+      res => console.log(res)
+    );
+   
+
   }
 
   afficherEmail(){
@@ -31,6 +47,9 @@ export class ProfilComponent implements OnInit {
     return this.authService.getDerniereConnexion();
   }
 
+  getCookieName(id:String){
+    return this.cookies.filter(res=> res.id == id)[0]["gout"];
+  }
 
 }
 

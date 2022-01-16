@@ -11,7 +11,7 @@ import { AccueilComponent } from './pages/accueil/accueil.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component'; 
 import { CookiesComponent } from './pages/cookies/cookies.component'; 
-import { PanierComponent } from './pages/panier/panier.component';
+import { PanierComponent } from './modules/auth/components/panier/panier.component';
 import { Erreur404Component } from './pages/erreur404/erreur404.component';
 
 //Angular Material imports

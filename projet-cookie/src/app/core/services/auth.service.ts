@@ -2,17 +2,14 @@
 import {
   Auth,
   createUserWithEmailAndPassword,
-  getAuth,
   signInWithEmailAndPassword,
   signOut,
 } from '@angular/fire/auth';
 
-import { Injectable, NgZone } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { ILoginData } from '../models/ilogin-data';
-import { doc, getDoc, getFirestore, setDoc } from 'firebase/firestore';
-import { PanierService } from './panier.service';
-import { ResolveEnd, Router } from '@angular/router';
-import { browserSessionPersistence, onAuthStateChanged, setPersistence } from 'firebase/auth';
+import { deleteDoc, doc, getFirestore, setDoc } from 'firebase/firestore';
+import { onAuthStateChanged } from 'firebase/auth';
 
 @Injectable({
   providedIn: 'root',
@@ -141,6 +138,12 @@ export class AuthService {
 
   getDerniereConnexion(){
     return this.auth.currentUser?.metadata.lastSignInTime;
+  }
+
+  async deletePanierUser(){
+    if(this.auth.currentUser!=null){
+      await deleteDoc(doc(this.db, "paniers", this.auth.currentUser.uid));
+    }
   }
 
 }

@@ -46,13 +46,10 @@ export class CookiesComponent implements OnInit {
     if(!this.estCo()){
        return this.snackBar.open('Vous devez vous connecter pour ajouter des cookies au panier', 'Fermer', {"duration": 2000, panelClass: ["sb-error"]});
     }else{
+      this.snackBar.open('1 Cookie '+ cookie.gout +' a été ajouté au panier', 'Fermer', {"duration": 2000, panelClass: ["sb-success"]});
       return this.panierService.ajouterCookiePanier(this.panier,cookie);
     }
   }
-
-
-
-  // 
 
   //Panier
   formGroup: FormGroup | any;
@@ -69,13 +66,9 @@ export class CookiesComponent implements OnInit {
   onSubmit(index: number,id: string, post:any) {
     this.post = post;
     console.log(post);
-    //var prix = this.listeIdCookies[index]["prix"] * post["quantite"];
-    //console.log(prix);
     var idUser = this.authService.getUserId()
-    //this.panierService.addOrder(idUser,id,post["quantite"],prix);
   } 
 
-  //
 
   ngOnInit() {
 

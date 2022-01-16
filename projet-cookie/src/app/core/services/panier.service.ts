@@ -20,9 +20,6 @@ export class PanierService  {
 
   idUtilisateur = this.authService.getUserId();
   
-  async deletePanierUser(){
-    await deleteDoc(doc(this.db, "paniers", this.idUtilisateur));
-  }
 
   getPanierByID(id:string){
     const docRef = doc(this.db,`paniers/${id}`);
@@ -72,11 +69,6 @@ export class PanierService  {
   }
 
   cookieEstDansLePanier(panier: IPanier, cookie: ICookie){
-
-    console.log("panier : " );
-    console.log(panier);
-    console.log("cookie:");
-    console.log(cookie);
 
    let res = panier.listeIdCookies.filter(res => res == cookie.id) 
     

@@ -6,6 +6,7 @@ import { ICookie } from 'src/app/core/models/icookie';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { CookiesListService } from 'src/app/core/services/cookies-list.service';
 import { PanierService } from 'src/app/core/services/panier.service';
+import { CommandeService } from 'src/app/core/services/commande.service';
 
 @Component({
   selector: 'app-panier',
@@ -20,7 +21,7 @@ import { PanierService } from 'src/app/core/services/panier.service';
 })
 export class PanierComponent implements OnInit {
 
-  constructor(private panierService: PanierService, private authService: AuthService,private cookiesService: CookiesListService, private router: Router,private activatedRoute: ActivatedRoute) { }
+  constructor(private panierService: PanierService, private authService: AuthService,private cookiesService: CookiesListService, private router: Router,private activatedRoute: ActivatedRoute,private commandeService: CommandeService) { }
 
   panier: IPanier = {
     id: this.authService.getUserId(),
@@ -37,8 +38,6 @@ export class PanierComponent implements OnInit {
     this.cookiesService.getCookies().subscribe(
       res => this.cookies = res
     );
-    console.log("Cookies")
-    console.log(this.cookies);
     this.panierService.getPanierByID(this.authService.getUserId()).subscribe(res => {
       this.panier = res;
     })
@@ -52,11 +51,12 @@ export class PanierComponent implements OnInit {
     return this.cookies.filter(res=> res.id == id)[0]["image"];
   }
 
-
-
   delete(index:number){
     this.panierService.deleteCookiesPanier(this.panier,index);
   }
 
+  validerCommande(panier: IPanier){
+    this.commandeService.getCommande(panier);
+  } 
 }
 

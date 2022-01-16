@@ -1,6 +1,13 @@
 .example-card {
     max-width: 400px;
   }
+
+#card-mon-profil{
+    width: 800px;
+    max-width: 100%;
+    display: block;
+    margin: auto;
+}
   
 .example-header-image {
     background-image: url('../../../../../assets/images/theme/user-picture.png');
@@ -11,3 +18,32 @@
     height: 70px;
     width: 70px;
 }
+
+.panier-table {
+    text-align: left;
+    border-collapse: collapse;
+    margin-bottom: 50px;
+    border: 3px  ridge rgba(0,0,0,.12);
+}
+    
+
+
+.panier-table th {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 3px  ridge rgba(0,0,0,.12);
+    margin-right: 10px;
+    margin-left: 10px;
+    min-width: 60px;
+    }
+
+
+.panier-table td {
+    padding:12px;
+}
+
+
+.panier-table tr:nth-child(odd){
+    background-color:rgba(0,0,0,.12);
+  }
+        
