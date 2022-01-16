@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { get } from 'firebase/database';
 import { ILoginData } from 'src/app/core/models/ilogin-data';
@@ -12,7 +13,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class ConnexionComponent implements OnInit {
   
-  constructor(private readonly authService: AuthService, private readonly router: Router) { 
+  constructor(private readonly authService: AuthService, private readonly router: Router,private snackBar: MatSnackBar) { 
     
   }
 
@@ -30,7 +31,7 @@ export class ConnexionComponent implements OnInit {
           this.router.navigate(['/profil'])
         }
       }) 
-      .catch((e) => console.log(e.message));
+      .catch((e) =>  this.snackBar.open(e.message,'Fermer', {"duration": 7000,panelClass: ["sb-error"]}));
   }
   
 }

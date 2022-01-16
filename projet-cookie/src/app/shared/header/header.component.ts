@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { PanierService } from 'src/app/core/services/panier.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -8,7 +9,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private authService : AuthService, private router: Router) { }
+  constructor(private authService : AuthService, private router: Router, private panierService: PanierService) { }
 
   ngOnInit(): void {
   }
@@ -23,6 +24,10 @@ export class HeaderComponent implements OnInit {
 
   estUserClassique(){
     return ((this.authService.estConnecte()) &&  !(this.authService.estAdmin()))
+  }
+
+  getNbCookiesPanier(){
+    //this.panierService.getNbTotalCookiePanier(this.panierService.getPanierByID(this.authService.getUserId()));
   }
 
   deconnexion(){

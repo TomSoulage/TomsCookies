@@ -1,10 +1,10 @@
 <mat-toolbar color="primary">
     <div><img  class="logo" src="../../../assets/images/cookie-icon.png"> </div>
-    <span> Tom's Cookie</span>
+    <span> Tom's Cookies</span>
     <div class="spacer"> </div>
     <a mat-button routerLink="accueil"><mat-icon>home</mat-icon> Accueil</a>
     <a mat-button routerLink="cookies"><mat-icon>store</mat-icon> Cookies</a>
-    <a *ngIf="estUserClassique()" mat-button routerLink="panier"><mat-icon>shopping_basket</mat-icon> Panier</a>
+    <a *ngIf="estUserClassique()" mat-button routerLink="panier"  > <mat-icon >shopping_basket</mat-icon> <span matBadge="4"  matBadgeColor="accent" matBadgeOverlap="false"> Panier</span>  </a>
     <a *ngIf="estUserClassique()" mat-button routerLink="profil"><mat-icon>person</mat-icon> Profil</a>
 
     <a *ngIf="estCo()" mat-raised-button (click)="deconnexion()" color="accent" ><mat-icon>login</mat-icon> Déconnexion</a>

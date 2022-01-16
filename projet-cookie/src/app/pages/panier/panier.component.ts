@@ -52,6 +52,8 @@ export class PanierComponent implements OnInit {
     return this.cookies.filter(res=> res.id == id)[0]["image"];
   }
 
+
+
   delete(index:number){
     this.panierService.deleteCookiesPanier(this.panier,index);
   }

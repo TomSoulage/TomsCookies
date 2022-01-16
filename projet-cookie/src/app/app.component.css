@@ -1,0 +1,15 @@
+::ng-deep .sb-error{
+    background-color: rgb(167, 15, 15);
+    color:white;
+}
+::ng-deep .sb-error span{
+    color:white;
+}
+::ng-deep .sb-success{
+    background-color: rgb(7, 160, 45);
+    color:white;
+}
+
+::ng-deep .sb-success span{
+    color:black;
+}

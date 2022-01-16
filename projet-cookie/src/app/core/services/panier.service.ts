@@ -93,5 +93,13 @@ export class PanierService  {
     return nbDeCeCookieActuel;
   } 
 
+  getNbTotalCookiePanier(panier:IPanier){
+    let sum = 0;
+    for (let i = 0; i < panier.listeNbCookies.length; i++) {
+      sum +=panier.listeNbCookies[i];
+    }
+    return sum;  
+  }
+
  
 }

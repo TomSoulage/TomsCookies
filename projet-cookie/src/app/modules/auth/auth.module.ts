@@ -15,13 +15,15 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ProfilComponent } from './components/profil/profil.component';
 import {MatTabsModule} from '@angular/material/tabs';
+import { CommandesComponent } from './components/commandes/commandes.component';
 
 @NgModule({
   declarations: [
     ConnexionComponent,
     FormulaireUserComponent,
     InscriptionComponent,
-    ProfilComponent
+    ProfilComponent,
+    CommandesComponent
   ],
   imports: [
     CommonModule,
