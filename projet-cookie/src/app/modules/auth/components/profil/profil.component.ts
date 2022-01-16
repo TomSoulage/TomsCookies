@@ -29,10 +29,8 @@ export class ProfilComponent implements OnInit {
       res =>  {this.commandes=res} 
     )
     this.commandeService.getCommandes().subscribe(
-      res => console.log(res)
-    );
-   
-
+      res =>  console.log(res)
+    )
   }
 
   afficherEmail(){

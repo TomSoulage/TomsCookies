@@ -6,6 +6,7 @@
     <a *ngIf="estUserClassique()" mat-button routerLink="panier"  > <mat-icon >shopping_basket</mat-icon> <span > Panier</span>  </a>
     <a *ngIf="estUserClassique()" mat-button routerLink="profil"><mat-icon>person</mat-icon> Profil</a>
     <a *ngIf="estAdmin()" mat-button routerLink="admin/"><mat-icon>build</mat-icon> Gestion des produits</a>
+    <a *ngIf="estAdmin()" mat-button routerLink="admin/liste-commandes"><mat-icon>view_list</mat-icon> Liste des commandes</a>
 
     <a *ngIf="estCo()" mat-raised-button (click)="deconnexion()" color="accent" ><mat-icon>login</mat-icon> Déconnexion</a>
 

@@ -58,6 +58,11 @@ export class CommandeService {
     return collectionData(q,{idField:'id'}) as Observable<ICommande[]>;
   }
 
+  getAllCommandes(): Observable<ICommande[]>{
+    let collec = collection(this.db, "commandes")
+    return collectionData(collec,{idField:'id'}) as Observable<ICommande[]>;
+  }
+  
   getCommandeByID(id:string){
     const docRef = doc(this.db,`commandes/${id}`);
     return docData(docRef, { idField: 'id' }) as Observable<ICommande>;

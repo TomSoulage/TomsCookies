@@ -45,6 +45,7 @@ Fonctionnalités :
 
 * *Admin* :
     * Ajouter / Supprimer / Mettre à jour des cookies
+    * Consulter les commandes
 
 * *Utilisateur* :
     * Se connecter
