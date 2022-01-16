@@ -3,18 +3,50 @@
     margin-bottom: 8px;
   }
   
-  .cookies-list{
-    display: flex;
-    justify-content: space-around;
-    width: auto;
-    margin: 15px auto;
-    width: 1000px;
-  }
-
+  
   .div-button {
       display: flex;
       justify-content: space-between;
   }
   
 
+.cookies-management-table td img{
+  width: 75px;
+  margin: auto;
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+
+
+.cookies-management-table {
+  margin: auto;
+  text-align: left;
+  border-collapse: collapse;
+  margin-bottom: 150px;
+}
+
+
+
+.cookies-management-table th {
+  padding: 12px;
+  text-align: left;
+  margin-bottom: 25px;
+  border-bottom: 3px  ridge rgba(0,0,0,.12);
+  margin-right: 10px;
+  margin-left: 10px;
+  min-width: 60px;
+}
+
+.cookies-management-table td {
+  padding:12px;
+}
+
+.cookies-management-table tr:nth-child(even){background-color: whitesmoke;}
+
   
+.add-button-div button{
+  display: block;
+  margin: auto;
+}

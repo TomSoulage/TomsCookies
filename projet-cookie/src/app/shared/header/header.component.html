@@ -6,6 +6,7 @@
     <a mat-button routerLink="cookies"><mat-icon>store</mat-icon> Cookies</a>
     <a *ngIf="estUserClassique()" mat-button routerLink="panier"  > <mat-icon >shopping_basket</mat-icon> <span matBadge="4"  matBadgeColor="accent" matBadgeOverlap="false"> Panier</span>  </a>
     <a *ngIf="estUserClassique()" mat-button routerLink="profil"><mat-icon>person</mat-icon> Profil</a>
+    <a *ngIf="estAdmin()" mat-button routerLink="admin/"><mat-icon>build</mat-icon> Gestion des produits</a>
 
     <a *ngIf="estCo()" mat-raised-button (click)="deconnexion()" color="accent" ><mat-icon>login</mat-icon> Déconnexion</a>
 

@@ -19,7 +19,8 @@
 .div-recette div{
 
   padding: 50% 10px;
-  
+  opacity: 1;
+
 }
 
 
@@ -60,7 +61,7 @@
   height: 35px;
   font-size: 35px;
   margin-bottom: 25px;
-  border-bottom: 2px  ridge rgba(0,0,0,.12);;
+  border-bottom: 2px  ridge rgba(0,0,0,.12);
 }
 
 .cookies-list .mat-card-subtitle{

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { CookiesListService } from 'src/app/core/services/cookies-list.service';
 @Component({
   selector: 'app-add-cookie',
@@ -8,7 +10,7 @@ import { CookiesListService } from 'src/app/core/services/cookies-list.service';
 })
 export class AddCookieComponent implements OnInit {
 
-  constructor(public cookiesListeService : CookiesListService, private formBuilder: FormBuilder) { }
+  constructor(public cookiesListeService : CookiesListService, private formBuilder: FormBuilder, private snackBar: MatSnackBar, private router: Router) { }
 
   formGroup: FormGroup | any;
   titleAlert: string = 'Ce champ est requis!';
@@ -31,8 +33,9 @@ export class AddCookieComponent implements OnInit {
   onSubmit(post: any) {
     this.post = post;
     console.log(post);
-    this.cookiesListeService.addCookie(post['gout'],post['prix'],post['recette'],post['image'])
-
+    this.cookiesListeService.addCookie(post['gout'],post['prix'],post['recette'],post['image']);
+    this.snackBar.open("Cookie ajouté ! ",'Fermer', {"duration": 7000,panelClass: ["sb-success"]});
+    this.router.navigate(['/admin']);
   }
 
 }

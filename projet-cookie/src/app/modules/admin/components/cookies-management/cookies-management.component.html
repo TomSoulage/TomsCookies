@@ -1,18 +1,29 @@
 <mat-card-title> Liste des cookies</mat-card-title>
-<div class="cookies-list">
-    <mat-card *ngFor="let c of cookies; index as indexOfElement" class="example-card">
-      <mat-card-title-group>
-        <mat-card-title> {{c.gout}} </mat-card-title>
-        <mat-card-subtitle> {{c.prix}} € </mat-card-subtitle>
-        <img mat-card-xl-image src="{{c.image}}" >
-      </mat-card-title-group>
-      <div class="div-button">
-          
-       
+ 
+<div class="add-button-div">
+  <button mat-raised-button color="primary" [routerLink]="['add-cookie']">Ajouter <mat-icon>add_circle</mat-icon></button> 
+</div>
 
-        <button mat-raised-button color="primary" [routerLink]="['update-cookie', c.id]"  > Modifier</button>
-        <button mat-raised-button color="warn" type="checkbox" (click)="delete(c)"> Supprimer</button>
-      </div>
-    </mat-card>
-</div>    
+<table class="cookies-management-table">
+  <tr>
+    <th>Image</th>
+    <th>Nom</th>
+    <th>Prix</th>
+    <th>Recette</th>
+    <th>Modifier</th>
+    <th>Supprimer</th>
+  </tr>
+  <tr *ngFor="let c of cookies; index as indexOfElement">
+    <td> <img class="cookie-img-tab" mat-card-xl-image src="{{c.image}}" ></td>
+    <td>{{c.gout}}</td>
+    <td>{{c.prix}}</td>
+    <td>{{c.recette}}</td>
+    <td><button mat-raised-button color="primary" [routerLink]="['update-cookie', c.id]"> <mat-icon>edit</mat-icon></button> </td>
+    <td> <button mat-raised-button color="warn" type="checkbox" (click)="delete(c)"> <mat-icon>delete</mat-icon></button> </td>
+  </tr>
+
+</table>
+
+
+
 <router-outlet></router-outlet>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ICookie } from 'src/app/core/models/icookie';
 import { CookiesListService } from 'src/app/core/services/cookies-list.service';
 
@@ -11,7 +12,7 @@ export class CookiesManagementComponent implements OnInit {
 
   cookies:ICookie[] = [];
 
-  constructor(public cookiesService : CookiesListService) { }
+  constructor(public cookiesService : CookiesListService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.cookiesService.getCookies().subscribe(
@@ -21,7 +22,7 @@ export class CookiesManagementComponent implements OnInit {
 
   delete(cookie: ICookie){
     this.cookiesService.deleteCookie(cookie);
-    alert('Cookie supprimé !');    
+    this.snackBar.open("Cookie supprimé ! ",'Fermer', {"duration": 5000,panelClass: ["sb-success"]}); 
   }
 }
 

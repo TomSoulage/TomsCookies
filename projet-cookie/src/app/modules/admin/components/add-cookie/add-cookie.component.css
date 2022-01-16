@@ -1,18 +1,18 @@
 
   .container {
-    padding: 10px;
+    padding: 50px;
   }
   
   
   .form-element {
-    padding: 5px 0px 25px 2px;
+    padding: 5px 0px 10px 2px;
   }
   
  
   :host {
     display: flex;
     justify-content: center;
-    margin: 100px 0px;
+    margin: 50px 0px;
   }
 
   .mat-form-field {
@@ -35,4 +35,8 @@
   .button {
     display: flex;
     justify-content: flex-end;
+  }
+
+  .add-cookie-card {
+    height: 100%;
   }

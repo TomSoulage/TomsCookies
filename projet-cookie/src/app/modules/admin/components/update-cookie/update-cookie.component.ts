@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { ICookie } from 'src/app/core/models/icookie';
 import { CookiesListService } from 'src/app/core/services/cookies-list.service';
@@ -17,7 +18,7 @@ export class UpdateCookieComponent implements OnInit {
   post: any = '';
 
 
-  constructor(private router:ActivatedRoute, private cookieService: CookiesListService, public fb: FormBuilder) { 
+  constructor(private router:ActivatedRoute, private cookieService: CookiesListService, public fb: FormBuilder, private snackBar: MatSnackBar) { 
     this._id=  this.router.snapshot.paramMap.get("id");
  
   }
@@ -67,7 +68,8 @@ export class UpdateCookieComponent implements OnInit {
     }
 
     this.cookieService.updateCookie(newCookie);
-    alert('Cookie mis à jour !');    
+    this.snackBar.open("Cookie modifié ! ",'Fermer', {"duration": 5000,panelClass: ["sb-success"]});
+
   }
  
 }
