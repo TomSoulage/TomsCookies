@@ -26,7 +26,7 @@ http://localhost:4200/accueil
 Connexion admin : 
 
 * email : admin@gmail.com
-* mdp : admin123
+Me demander pour le mot de passe
 
 Connexion utilisateur lambda ayant passé plusieurs commandes :
 
