@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 /*@import '~@angular/material/prebuilt-themes/deeppurple-amber.css'; */
 
+
 html {
 	height: 100%;
   }
@@ -29,15 +30,33 @@ footer {position: absolute; bottom: 0; left: 0; right: 0; margin-top:10px;}
 }
 
 
-.titre-page span{
+
+.titre-page {
+  padding: 25px;
   text-align: center;
-  font-size: 50px;
-  font-family: Copperplate;
   display: block;
-  color: #3e2723;
-  border-bottom: #a1887f 1px  inset;;
-  width: 600px;
   margin: auto;
-  padding-bottom: 20px;
-  margin-top: 40px;
+  color: white;
+  background-color: rgb(0, 0, 0);
+  margin-bottom: 75px;
+  font-size: 50px;
+} 
+
+
+
+@media (max-width:760px) {
+
+  .titre-page {
+    font-size: 30px;
+  } 
+
+}
+
+
+@media (max-width:300px) {
+
+  .titre-page {
+    font-size: 100%;
+  } 
+
 }

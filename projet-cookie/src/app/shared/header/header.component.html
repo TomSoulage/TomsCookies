@@ -1,15 +1,44 @@
-<mat-toolbar color="primary">
-    <div><img routerLink="accueil" class="logo" src="../../../assets/images/theme/logo.png"> </div>
-    <div class="spacer"> </div>
-    <a mat-button routerLink="accueil"><mat-icon>home</mat-icon> Accueil</a>
-    <a mat-button routerLink="cookies"><mat-icon>store</mat-icon> Cookies</a>
-    <a *ngIf="estUserClassique()" mat-button routerLink="panier"  > <mat-icon >shopping_basket</mat-icon> <span > Panier</span>  </a>
-    <a *ngIf="estUserClassique()" mat-button routerLink="profil"><mat-icon>person</mat-icon> Profil</a>
-    <a *ngIf="estAdmin()" mat-button routerLink="admin/"><mat-icon>build</mat-icon> Gestion des produits</a>
-    <a *ngIf="estAdmin()" mat-button routerLink="admin/liste-commandes"><mat-icon>view_list</mat-icon> Liste des commandes</a>
+<mat-toolbar class="header-toolbar" >
+    <!-- <a mat-button routerLink="accueil"> Accueil</a> -->
 
-    <a *ngIf="estCo()" mat-raised-button (click)="deconnexion()" color="accent" ><mat-icon>login</mat-icon> Déconnexion</a>
+      <a mat-button routerLink="cookies"> Nos cookies</a>
+      <a mat-button  *ngIf="estUserClassique()" mat-button routerLink="profil">Profil</a>
+  
+      <a><img routerLink="accueil" class="logo" src="../../../assets/images/logo/logo.svg"> </a>
+  
+      <a mat-button *ngIf="estUserClassique()" mat-button routerLink="panier" ><span > Panier</span>  </a>
+      <a mat-button  *ngIf="estAdmin()" mat-button routerLink="admin/"><mat-icon>build</mat-icon> Gestion des produits</a>
+      <a mat-button  *ngIf="estAdmin()" mat-button routerLink="admin/liste-commandes"><mat-icon>view_list</mat-icon> Liste des commandes</a>
+  
+      <a mat-button  *ngIf="estCo()" mat-button (click)="deconnexion()" > Déconnexion</a>
+  
+      <a mat-button  *ngIf="!estCo()" mat-button routerLink="connexion"> Connexion</a>
 
-    <a *ngIf="!estCo()" mat-raised-button color="accent" routerLink="connexion"><mat-icon>login</mat-icon> Connexion</a>
+</mat-toolbar>
 
-  </mat-toolbar>
+
+
+<mat-toolbar class="header-toolbar-mobile">
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="openMenu()" [style.display]='isOpenDisplay'>
+    <mat-icon>menu</mat-icon>
+  </button>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="openMenu()" [style.display]='isCloseDisplay'>
+    <mat-icon>close</mat-icon>
+  </button>
+  <span class="example-spacer"></span>
+  <a><img routerLink="accueil" class="logo" src="../../../assets/images/logo/logo.svg"> </a>
+  <span class="example-spacer"></span>
+</mat-toolbar>
+<div class="spacer-menu-mobile"></div>
+
+<div id="menu-mobile" [style.display]='menuMobileDisplay' >
+  <a mat-button routerLink="cookies" (click)="openMenu()">  Nos cookies</a>
+  <a mat-button  *ngIf="estUserClassique()" mat-button routerLink="profil" (click)="openMenu()">Profil</a>
+  <a mat-button *ngIf="estUserClassique()" mat-button routerLink="panier" (click)="openMenu()" ><span > Panier</span>  </a>
+  <a mat-button  *ngIf="estAdmin()" mat-button routerLink="admin/" (click)="openMenu()" ><mat-icon>build</mat-icon> Gestion des produits</a>
+  <a mat-button  *ngIf="estAdmin()" mat-button routerLink="admin/liste-commandes" (click)="openMenu()" ><mat-icon>view_list</mat-icon> Liste des commandes</a>
+  <a mat-button  *ngIf="estCo()" mat-button (click)="deconnexion()" (click)="openMenu()" > Déconnexion</a>
+  <a mat-button  *ngIf="!estCo()" mat-button routerLink="connexion" (click)="openMenu()"> Connexion</a>
+</div>
+
+

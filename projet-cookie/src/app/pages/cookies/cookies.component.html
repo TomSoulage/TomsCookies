@@ -1,4 +1,6 @@
-<div class="titre-page"> <span> Nos Cookies </span></div>
+<div class="home-body">
+
+<div class="titre-page"> <span> Nos Cookies </span></div> 
 
 <div class="cookies-list">
   <mat-card *ngFor="let c of cookies; index as indexOfElement" class="example-card">
@@ -11,11 +13,13 @@
     </mat-card-title-group>
          
     <div class="flex-buttons">
-      <button mat-raised-button color="accent"  (click)="afficherRecette(indexOfElement)" type="checkbox" >  <mat-icon>subtitles</mat-icon> Recette</button>
-      <button mat-raised-button color="primary"  type="checkbox" (click)="ajouterAuPanier(c)"> <mat-icon>add_shopping_cart</mat-icon>  Ajouter </button>       
+      <button mat-raised-button class="btn-recette"  (click)="afficherRecette(indexOfElement)" type="checkbox" >   Recette</button>
+      <button mat-raised-button class="btn-add-panier"  type="checkbox" (click)="ajouterAuPanier(c)" color="primary"> Ajouter au panier  </button>       
     </div>
 
     <div class="div-cookie-prix">  <div class="cookie-prix"> {{c.prix}} € </div>  
     </div>  
   </mat-card>
+</div>
+
 </div>

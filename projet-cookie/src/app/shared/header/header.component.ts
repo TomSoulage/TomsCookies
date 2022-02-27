@@ -11,7 +11,16 @@ export class HeaderComponent implements OnInit {
 
   constructor(private authService : AuthService, private router: Router, private panierService: PanierService) { }
 
+  menuMobileDisplay = "none";
+  isCloseDisplay = "none";
+  isOpenDisplay = "block";
+  isOpen = false; 
+
   ngOnInit(): void {
+      this.isOpen = false; 
+      this.isCloseDisplay = "none";
+      this.isOpenDisplay = "block";
+      console.log("test");
   }
 
   estCo(){
@@ -35,6 +44,23 @@ export class HeaderComponent implements OnInit {
       .logout()
       .then(() => this.router.navigate(['/']))
       .catch((e) => console.log(e.message));
+  }
+
+  openMenu(){
+
+    if(!this.isOpen){
+      this.menuMobileDisplay = "flex";
+      this.isOpen = true; 
+      this.isCloseDisplay = "block";
+      this.isOpenDisplay = "none";
+
+    }else{
+      this.menuMobileDisplay = "none";
+      this.isOpen = false; 
+      this.isCloseDisplay = "none";
+      this.isOpenDisplay = "block";
+
+    }  
   }
   
 }

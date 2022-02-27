@@ -3,34 +3,36 @@
    <div class="div-panier-table" *ngIf="panier.listeIdCookies.length > 1 "  >
         <table class="panier-table">
             <tr>
-              <th>Images</th>
+              <th class="col-img-tab">Images</th>
               <th>Nom</th>
               <th>Quantite</th>
-              <th>Prix Total par Cookie</th>
+              <th>Prix Cookie(s)</th>
               <th>Supprimer</th>
             </tr>
             <tr *ngFor="let cookie of panier.listeIdCookies;let indexOfElement=index">
-     <td *ngIf="indexOfElement>0"> <img class="cookie-img-tab" mat-card-xl-image src="{{getCookieImage(cookie)}}" ></td>
+     <td class="col-img-tab" *ngIf="indexOfElement>0"> <img class="cookie-img-tab" mat-card-xl-image src="{{getCookieImage(cookie)}}" ></td>
                     <td *ngIf="indexOfElement>0"> <span> {{getCookieName(cookie)}} </span></td>
                     <td *ngIf="indexOfElement>0"> {{this.panier.listeNbCookies[indexOfElement]}}</td>
                     <td *ngIf="indexOfElement>0">{{this.panier.listePrixTotalParCookie[indexOfElement]}} </td>
-                    <td *ngIf="indexOfElement>0">   <button mat-raised-button color="accent" type="checkbox" (click)="delete(indexOfElement)" > <mat-icon>delete</mat-icon></button> </td>
+                    <td *ngIf="indexOfElement>0">   <button class="btn-delete" mat-raised-button type="checkbox" (click)="delete(indexOfElement)" > <mat-icon>delete</mat-icon></button> </td>
             </tr>
           
           </table>
     
           <div class="div-panier-end">
             <div class="add-button-div button">
-                <button mat-raised-button color="accent">  Prix total:  {{panier.prixTotal}} €</button> 
+                <div class="div-prix-total">  Prix total:  {{panier.prixTotal}} €</div> 
              </div>
               <div class="add-button-div">
-                <button mat-raised-button color="primary" (click)="validerCommande(this.panier)">Commander</button> 
+                <button mat-raised-button (click)="validerCommande(this.panier)">Commander</button> 
               </div>
           </div>
   </div>
 
     <div *ngIf="panier.listeIdCookies.length==1" >
-        <span><img class="img-resp" src="../../../../../assets/images/theme/panier-vide.png"></span>
+        <span class="span-panier-vide">
+          Panier vide !
+        </span> 
     </div>
 
    
