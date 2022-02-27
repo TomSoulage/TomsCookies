@@ -1,5 +1,3 @@
-# Tom's Cookies Project
-
 Website developped with Angular (Front) and Firebase (Back).
 Designed with Angular Material.
 
