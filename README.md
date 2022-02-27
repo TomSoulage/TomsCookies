@@ -1,6 +1,10 @@
 # Tom's Cookies Project
 
+Website developped with Angular (Front) and Firebase (Back).
+Designed with Angular Material.
+
 Ce projet est réalisé dans le cadre de la matière Cloud Front à Cy-Tech Pau.
+Le site **Tom's Cookie** est une simulation d'une boutique vendant des cookies. 
 
 
 Avant de lancer le projet, vous devez avoir les configurations/installations suivantes : 
@@ -18,12 +22,6 @@ http://localhost:4200/accueil
 
 ---
 
-Les outils utilisées : 
-* Back : Firebase
-* Design : Angular Material
-
-
-Le site **Tom's Cookie** est une simulation de boutique de ventes de cookie. 
 
 Connexion admin : 
 
