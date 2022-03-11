@@ -2,10 +2,11 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin: auto;
+    margin: 100px 0;
     width: 500px;
     padding: 25px;
     max-width: 100%;
+    font-size: 17px;
 }
 
 .home-body {
@@ -22,10 +23,16 @@
 
 .home-div{
     display: flex;
-    width: 800px;
+    width: 1000px;
     margin: auto;
     background-color: rgba(97, 97, 117, 0.041);
+    max-width: 100%;
+}
 
+.home-div-margin-bottom{
+    margin-bottom: 70px;
+    display: block;
+    
 }
 
 
@@ -36,16 +43,20 @@
 
 
 @media (max-width:830px) {
+
+    .home-div-margin-bottom{
+        display: none;
+    }
     .home-text-presentation{
-        width: 350px;
         max-width: 100%;
         padding: 10px;
         width: 75%;
+        margin: 10px auto;
     }
     .home-div{
         flex-direction: column;
         max-width: 100%;
-        width: 600px;
+        width: 100%;
         text-align: center;
     }
 

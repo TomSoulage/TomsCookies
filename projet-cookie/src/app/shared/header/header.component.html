@@ -28,10 +28,12 @@
   <span class="example-spacer"></span>
   <a><img routerLink="accueil" class="logo" src="../../../assets/images/logo/logo.svg"> </a>
   <span class="example-spacer"></span>
+  <a> <img routerLink="accueil" class="logo" id="use-to-center" src="../../../assets/images/logo/logo.svg"> </a>
 </mat-toolbar>
 <div class="spacer-menu-mobile"></div>
 
 <div id="menu-mobile" [style.display]='menuMobileDisplay' >
+  <a mat-button routerLink="accueil" (click)="openMenu()">Accueil</a>
   <a mat-button routerLink="cookies" (click)="openMenu()">  Nos cookies</a>
   <a mat-button  *ngIf="estUserClassique()" mat-button routerLink="profil" (click)="openMenu()">Profil</a>
   <a mat-button *ngIf="estUserClassique()" mat-button routerLink="panier" (click)="openMenu()" ><span > Panier</span>  </a>

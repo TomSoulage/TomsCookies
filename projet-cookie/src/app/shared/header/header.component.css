@@ -20,7 +20,6 @@
 .header-toolbar a{
     color: black;
     padding: 0 50px;
-
 }
 
 
@@ -35,6 +34,7 @@
 .spacer-menu-mobile {
     display: none;
 }
+
 
 @media (max-width:760px) {
     .header-toolbar {
@@ -89,5 +89,8 @@
         margin-bottom: 10px;
     }
 
+    #use-to-center{
+        visibility: hidden;
+    }
     
 }

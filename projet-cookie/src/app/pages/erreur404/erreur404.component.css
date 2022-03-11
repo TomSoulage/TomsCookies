@@ -1,3 +1,37 @@
-.erreur-img{
+.erreur404-div{
+    display: flex;
+    box-sizing: border-box;
+    padding: 0 16px;
     width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 150px;
+    height: 100px;
+}
+
+.erreur404-div div{
+ padding: 15px;
+}
+
+
+.erreur404{
+    display: block;
+    font-size: 30px;
+    text-align: center;
+    width: 100%;
+}
+
+.return-acc{
+    background-color: #000000;
+    color: white;
+    font-weight: 800;
+    display: block;
+
+}
+
+@media (max-width:780px) {
+    .erreur404{
+        font-size: 20px;
+    }
 }

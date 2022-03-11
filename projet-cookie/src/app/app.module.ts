@@ -68,7 +68,7 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
     MatBadgeModule,
     MatDialogModule,
     MatSnackBarModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
+    //AngularFireModule.initializeApp(environment.firebaseConfig),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAnalytics(() => getAnalytics()),
     provideAuth(() => getAuth()),
